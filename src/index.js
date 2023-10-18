@@ -1,13 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import backgroundImage from './Tomato-BG-01.jpeg';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <div style={{ backgroundImage: `url(${backgroundImage})`}}>
+      <br/>
+
+      <div class="p-4" id="AppHere" >
+          <br/>
+      </div>
+
+      <br/><br/><br/>
+    
+      <App />
+    
+    </div>
   </React.StrictMode>
 );
 
