@@ -2,7 +2,18 @@ import ReactDOM from 'react-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
+import Header from './Header';
+import Footer from './Footer';
 import Login from './Login';
+import Register from './Register';
+import HomeLinks from './HomeLinks';
+
+import Player from './Player';
+import Timer from './Timer';
+import StartGame from './StartGame';
+import Level from './Level';
+import Leaderboard from './Leaderboard';
+import UserProfile from './UserProfile';
 
 export default function HomePage(){
     return(
@@ -16,6 +27,7 @@ export default function HomePage(){
                     </div>
                 </div>
             </div>
+            <br/><br/>
         </div>
     );
 }

@@ -1,25 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import Main from './App';
 import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import backgroundImage from './Tomato-BG-01.jpeg';
 
+document.title = "Domeytoe";
+let link = document.querySelector("link[rel*='icon']");
+link.href = 'https://cdn-icons-png.flaticon.com/512/1202/1202125.png';
+document.getElementsByTagName('head')[0].appendChild(link);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <div style={{ backgroundImage: `url(${backgroundImage})`}}>
-      <br/>
-
-      <div class="p-4" id="AppHere" >
-          <br/>
-      </div>
-
-      <br/><br/><br/>
-    
-      <App />
-    
+      <br/><br/><br/><br/>
+      <Main />
     </div>
   </React.StrictMode>
 );

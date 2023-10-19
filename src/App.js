@@ -2,23 +2,22 @@ import ReactDOM from 'react-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-import Footer from './Footer';
 import Header from './Header';
+import Footer from './Footer';
+import Login from './Login';
+import Register from './Register';
+import HomeLinks from './HomeLinks';
 import HomePage from './HomePage';
 import Player from './Player';
 import Timer from './Timer';
-import HomeLinks from './HomeLinks';
-import UserProfile from './UserProfile';
-import Leaderboard from './Leaderboard';
 import StartGame from './StartGame';
 import Level from './Level';
-import Login from './Login';
-import Register from './Register';
+import Leaderboard from './Leaderboard';
+import UserProfile from './UserProfile';
 
-
-function App() {
+function Main() {
   return (
-    <div className="App">
+    <div>
       <Header/>
       <Timer/>
       <Player/>
@@ -28,4 +27,4 @@ function App() {
   );
 }
 
-export default App;
+export default Main;
