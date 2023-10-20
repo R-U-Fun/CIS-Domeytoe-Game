@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import backgroundImage from './Tomato-BG-01.jpeg';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -17,10 +18,11 @@ import UserProfile from './UserProfile';
 
 function Main() {
   return (
-    <div>
+    <div style={{ backgroundImage: `url(${backgroundImage})`}}>
+      <br/><br/><br/>  
       <Header/>
-      <Timer/>
-      <Player/>
+      <div id="PlayerHere"></div>
+      <div id="TimerHere"></div>
       <HomePage/>
       <Footer/>
     </div>

@@ -4,7 +4,6 @@ import Main from './App';
 import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import backgroundImage from './Tomato-BG-01.jpeg';
 
 document.title = "Domeytoe";
 let link = document.querySelector("link[rel*='icon']");
@@ -14,8 +13,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <div style={{ backgroundImage: `url(${backgroundImage})`}}>
-      <br/><br/><br/><br/>
+    <div id="DomeytoeHere">
       <Main />
     </div>
   </React.StrictMode>

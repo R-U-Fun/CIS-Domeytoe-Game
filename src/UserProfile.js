@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
+import Main from './App';
 import Header from './Header';
 import Footer from './Footer';
 import Login from './Login';
@@ -16,6 +17,7 @@ import Leaderboard from './Leaderboard';
 
 
 export default function UserProfile(props){
+    ReactDOM.render(<div></div>, document.getElementById('TimerHere'));
     return(
         <div>
         <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Profile</a>

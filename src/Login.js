@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
+import Main from './App';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -21,11 +22,11 @@ export default function Login(){
             <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Login</a>
             <br/><br/><br/>
             <div className="input-group mb-3">
-                <span className="input-group-text" id="basic-addon1"><i className="bi bi-at"></i></span>
+                <span className="input-group-text btn btn-danger" id="basic-addon1"><i className="bi bi-at"></i></span>
                 <input type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"/>
             </div>
             <div className="input-group mb-3">
-                <span className="input-group-text" id="basic-addon1"><i className="bi bi-asterisk"></i></span>
+                <span className="input-group-text btn btn-danger" id="basic-addon1"><i className="bi bi-asterisk"></i></span>
                 <input type="password" className="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1"/>
             </div>
             <button type="button" className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<Register />, document.getElementById('Box'))}><i className="bi bi-pen"></i> Register</button>
