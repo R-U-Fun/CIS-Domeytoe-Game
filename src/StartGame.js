@@ -17,6 +17,7 @@ import Timer, { StopTimer } from './Timer';
 import Level from './Level';
 import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
+import BestTime from './BestTime';
 
 export function GameOver(props){
     return(
@@ -78,6 +79,7 @@ function Game(props){
                     <button type="button" className="bi bi-arrow-return-right btn btn-danger fw-bold" onClick={() => ReactDOM.render(<CorrectOrNot Correct={parseInt(props.solution)} Answer={parseInt(inputRef.current.value)} HowManyHearts={HowManyHearts} setHowManyHearts={setHowManyHearts} stopTimer={props.stopTimer} Level={props.Level} />, document.getElementById('CoN'))}></button>
                 </div>
                 <div id="CoN"></div>
+                <div id="Best"></div>
             </div>
         </div>
     );
@@ -117,6 +119,7 @@ export default function StartGame(props){
 
     const stopTimer = () => {
         clearInterval(OneSecPass);
+        ReactDOM.render(<BestTime TimeElapsed={TimeElapsed} />, document.getElementById('CoN'));
     };
     
     fetch('https://marcconrad.com/uob/tomato/api.php')
