@@ -18,6 +18,7 @@ import Leaderboard from './Leaderboard';
 
 export default function UserProfile(props){
     ReactDOM.render(<div></div>, document.getElementById('TimerHere'));
+    ReactDOM.render(<div></div>, document.getElementById('PlayerHere')); 
     return(
         <div>
         <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Profile</a>
