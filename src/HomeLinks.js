@@ -28,8 +28,8 @@ export default function HomeLinks(){
     return(
         <div>
             <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Domeytoe</a><br/>
-            <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<StartGame />, document.getElementById('Box'))} style={{width:"200px"}}>Start Game</button><br/>
-            <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<Level />, document.getElementById('Box'))} style={{width:"200px"}}>Levels</button><br/>
+            <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<Level />, document.getElementById('Box'))} style={{width:"200px"}}>Start Game</button><br/>
+            <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<StartGame />, document.getElementById('Box'))} style={{width:"200px"}}>Daily Challenges</button><br/>
             <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<Leaderboard />, document.getElementById('Box'))} style={{width:"200px"}}>Leaderboard</button><br/>
             <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<UserProfile Username="Aaroophan" Best1={1} Best2={2} Played={10} Won={8} />, document.getElementById('Box'))} style={{width:"200px"}}>Profile</button><br/>
             <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<LogOut />, document.getElementById('Box'))} style={{width:"200px"}}>Logout</button><br/>

@@ -21,7 +21,7 @@ export default function UserProfile(props){
     return(
         <div>
         <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Profile</a>
-        <br/><br/>
+        <br/><br/><br/>
             <table className="text-start">
                 <tbody>
                     <tr>
@@ -42,7 +42,7 @@ export default function UserProfile(props){
                     </tr>
                 </tbody>
             </table>
-        <br/><br/>
+        <br/><br/><br/>
         </div>
     );
 }

@@ -21,9 +21,9 @@ export default function Level(){
         <div>
             <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Levels</a>
             <br/><br/><br/>
-            <button className="btn btn-danger btn-lg m-4 fw-bold" onClick={() => ReactDOM.render(<StartGame />, document.getElementById('Box'))} style={{width:"200px"}}>Easy</button><br/>
-            <button className="btn btn-danger btn-lg m-4 fw-bold" onClick={() => ReactDOM.render(<StartGame />, document.getElementById('Box'))} style={{width:"200px"}}>Medium</button><br/>
-            <button className="btn btn-danger btn-lg m-4 fw-bold" onClick={() => ReactDOM.render(<StartGame />, document.getElementById('Box'))} style={{width:"200px"}}>Hard</button>
+            <button className="btn btn-danger btn-lg m-4 fw-bold" onClick={() => ReactDOM.render(<StartGame Level={1} />, document.getElementById('Box'))} style={{width:"200px"}}>Easy</button><br/>
+            <button className="btn btn-danger btn-lg m-4 fw-bold" onClick={() => ReactDOM.render(<StartGame Level={2} />, document.getElementById('Box'))} style={{width:"200px"}}>Medium</button><br/>
+            <button className="btn btn-danger btn-lg m-4 fw-bold" onClick={() => ReactDOM.render(<StartGame Level={3} />, document.getElementById('Box'))} style={{width:"200px"}}>Hard</button>
             <br/><br/><br/>
         </div>
     );

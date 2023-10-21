@@ -18,11 +18,10 @@ import Level from './Level';
 import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
 
-function GameOver(props){
+export function GameOver(){
     return(
         <div>
             <i class="bi bi-heartbreak-fill btn btn-danger btn-lg m-4 fs-2 fw-bold"></i><br/>
-            <a className="btn btn-danger btn-lg m-4 fw-bold">Answer is {props.Correct}</a>
         </div>
     );
 }
@@ -57,7 +56,8 @@ function CorrectOrNot(props){
 }
 
 function Game(props){
-    ReactDOM.render(<Timer/>, document.getElementById('TimerHere'));
+    ReactDOM.render(<Timer Level={props.Level} />, document.getElementById('TimerHere'));
+    ReactDOM.render(<Player HowManyHearts={props.HowManyHearts}/>, document.getElementById('PlayerHere'));
     const inputRef = useRef();
     const [HowManyHearts, setHowManyHearts] = useState(props.HowManyHearts);
     return(
@@ -72,19 +72,19 @@ function Game(props){
                     <button type="button" className="bi bi-arrow-return-right btn btn-danger fw-bold" onClick={() => ReactDOM.render(<CorrectOrNot Correct={parseInt(props.solution)} Answer={parseInt(inputRef.current.value)} HowManyHearts={HowManyHearts} setHowManyHearts={setHowManyHearts}/>, document.getElementById('CoN'))}></button>
                 </div>
                 <div id="CoN"></div>
-                <button class="bi bi-arrow-clockwise btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<StartGame />, document.getElementById('Box'))}></button>
+                <button class="bi bi-arrow-clockwise btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<StartGame Level={props.Level} />, document.getElementById('Box'))}></button>
             </div>
         </div>
     );
 }
         
-export default function StartGame(){
+export default function StartGame(props){
     fetch('https://marcconrad.com/uob/tomato/api.php')
         .then(response => response.json())
         .then(data => {
             console.log("API - Question = "+data.question);
             console.log("API - Solution = "+data.solution);
-            ReactDOM.render(<Game question={data.question} solution= {data.solution} HowManyHearts={3} />, document.getElementById('Box'));
+            ReactDOM.render(<Game question={data.question} solution= {data.solution} HowManyHearts={3} Level={props.Level} />, document.getElementById('Box'));
         })
         .catch(error => console.error('Error:', error));
     return null;

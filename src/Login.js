@@ -20,7 +20,7 @@ export default function Login(){
     return(
         <div>
             <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Login</a>
-            <br/><br/><br/>
+            <br/><br/><br/><br/>
             <div className="input-group mb-3">
                 <span className="input-group-text btn btn-danger" id="basic-addon1"><i className="bi bi-at"></i></span>
                 <input type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"/>
@@ -31,7 +31,7 @@ export default function Login(){
             </div>
             <button type="button" className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<Register />, document.getElementById('Box'))}><i className="bi bi-pen"></i> Register</button>
             <button type="button" className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<HomeLinks />, document.getElementById('Box'))}><i className="bi bi-door-closed"></i> Login</button>
-            <br/><br/><br/><br/>
+            <br/><br/><br/><br/><br/>
         </div>
     );
 }
