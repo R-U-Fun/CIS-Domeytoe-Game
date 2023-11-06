@@ -2,6 +2,9 @@ import ReactDOM from 'react-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
+import React, { useState } from 'react';
+import axios from 'axios';
+
 import Main from './App';
 import Header from './Header';
 import Footer from './Footer';
@@ -17,30 +20,30 @@ import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
 
 export default function Login(){
-    // Define the URL you want to send data to
-const url = 'https://dummyjson.com/products/add';
+    // Define the URL you want to send data to 
+    //const url = 'https://dummyjson.com/products/add';
 
-// Define the data you want to send
-const data = {
-  key1: 'value1',
-  key2: 'value2'
-};
+// // Define the data you want to send
+// const data = {
+//   key1: 'value1',
+//   key2: 'value2'
+// };
 
-// Use fetch to send the data
-fetch(url, {
-  method: 'POST', // or 'PUT'
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(data),
-})
-.then(response => response.json())
-.then(data => {
-  console.log('Success:', data);
-})
-.catch((error) => {
-  console.error('Error:', error);
-});
+// // Use fetch to send the data
+// fetch(url, {
+//   method: 'POST', // or 'PUT'
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+//   body: JSON.stringify(data),
+// })
+// .then(response => response.json())
+// .then(data => {
+//   console.log('Success:', data);
+// })
+// .catch((error) => {
+//   console.error('Error:', error);
+// });
     return(
         <div>
             <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Login</a>
