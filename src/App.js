@@ -21,8 +21,6 @@ function Main() {
     <div style={{ backgroundImage: `url(${backgroundImage})`}}>
       <br/><br/><br/>  
       <Header/>
-      <div id="PlayerHere"></div>
-      <div id="TimerHere"></div>
       <HomePage/>
       <Footer/>
     </div>

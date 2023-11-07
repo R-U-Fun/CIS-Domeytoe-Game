@@ -22,7 +22,7 @@ import UserProfile from './UserProfile';
 export default function Login(){
     return(
         <div>
-            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Login</a>
+            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px", cursor: 'auto'}}>Login</a>
             <br/><br/><br/><br/>
             <div className="input-group mb-3">
                 <span className="input-group-text btn btn-danger" id="basic-addon1"><i className="bi bi-at"></i></span>

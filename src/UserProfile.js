@@ -19,33 +19,40 @@ import Leaderboard from './Leaderboard';
 function UserProfileUI(props){
     return(
         <div>
-        <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Profile</a>
-        <br/><br/><br/>
+        <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks />, document.getElementById('Box'))}>Profile</a>
+        <br/>
             <table className="text-start">
                 <tbody>
                     <tr>
-                        <th><a className="btn btn-danger m-2 fw-bold" style={{width:"200px"}}>User ID</a></th>
-                        <td><a className="btn btn-danger m-2 fw-bold" style={{width:"200px"}}>{props.UserID}</a></td>
+                        <th><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>User ID</a></th>
+                        <td><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>{props.UserID}</a></td>
                     </tr>
                     <tr>
-                        <th><a className="btn btn-danger m-2 fw-bold" style={{width:"200px"}}>Username</a></th>
-                        <td><a className="btn btn-danger m-2 fw-bold" style={{width:"200px"}}>{props.Name}</a></td>
+                        <th><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>Username</a></th>
+                        <td><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>{props.Name}</a></td>
                     </tr>
                     <tr>
-                        <th><a className="btn btn-danger m-2 fw-bold" style={{width:"200px"}}>Best Time</a></th>
-                        <td><a className="btn btn-danger m-2 fw-bold" style={{width:"200px"}}>{props.BestTime}</a></td>
+                        <th><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>Longest Streaks</a></th>
+                        <td><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>{props.DailyStreaks}</a></td>
                     </tr>
                     <tr>
-                        <th><a className="btn btn-danger m-2 fw-bold" style={{width:"200px"}}>Games Played</a></th>
-                        <td><a className="btn btn-danger m-2 fw-bold" style={{width:"200px"}}>{props.GamesPlayed}</a></td>
+                        <th><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>Rank</a></th>
+                        <td><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>{props.Rank}</a></td>
                     </tr>
                     <tr>
-                        <th><a className="btn btn-danger m-2 fw-bold" style={{width:"200px"}}>Games Won</a></th>
-                        <td><a className="btn btn-danger m-2 fw-bold" style={{width:"200px"}}>{props.GamesWon}</a></td>
+                        <th><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>Best Time</a></th>
+                        <td><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>{props.BestTime}</a></td>
+                    </tr>
+                    <tr>
+                        <th><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>Games Played</a></th>
+                        <td><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>{props.GamesPlayed}</a></td>
+                    </tr>
+                    <tr>
+                        <th><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>Games Won</a></th>
+                        <td><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>{props.GamesWon}</a></td>
                     </tr>
                 </tbody>
             </table>
-        <br/><br/><br/>
         </div>
     );
 }
@@ -61,11 +68,13 @@ export default function UserProfile(props){
         console.log("DATA Users= "+Data.UserID);
         console.log("DATA Name = "+Data.Name);
         console.log("DATA Password = "+Data.Password);
+        console.log("DATA DailyStreaks = "+Data.DailyStreaks);
+        console.log("DATA Rank = "+Data.Rank);
         console.log("DATA BestTime = "+Data.BestTime);
         console.log("DATA GamesPlayed = "+Data.GamesPlayed);
         console.log("DATA GamesWon = "+Data.GamesWon);
 
-        ReactDOM.render(<UserProfileUI UserID={Data.UserID} Name={Data.Name} BestTime={Data.BestTime} GamesPlayed={Data.GamesPlayed} GamesWon={Data.GamesWon} />, document.getElementById('Box'));
+        ReactDOM.render(<UserProfileUI UserID={Data.UserID} Name={Data.Name} DailyStreaks={Data.DailyStreaks} Rank={Data.Rank} BestTime={Data.BestTime} GamesPlayed={Data.GamesPlayed} GamesWon={Data.GamesWon} />, document.getElementById('Box'));
 
     })
     .catch(error => console.error('Error:', error));

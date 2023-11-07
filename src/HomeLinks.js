@@ -27,7 +27,7 @@ export default function HomeLinks(){
     ReactDOM.render(<div></div>, document.getElementById('TimerHere'));
     return(
         <div>
-            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Domeytoe</a><br/>
+            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks />, document.getElementById('Box'))}>Domeytoe</a><br/>
             <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<Level />, document.getElementById('Box'))} style={{width:"200px"}}>Start Game</button><br/>
             <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<StartGame />, document.getElementById('Box'))} style={{width:"200px"}}>Daily Challenges</button><br/>
             <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<Leaderboard />, document.getElementById('Box'))} style={{width:"200px"}}>Leaderboard</button><br/>

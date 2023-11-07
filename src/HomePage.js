@@ -21,11 +21,13 @@ export default function HomePage(){
         <div>
             <div className="container text-center">
                 <div className="row gx-3 text-center justify-content-center">
-                    <div className="col-sm-4 col-md-4 col-lg-6 rounded-4 border border-danger border-5">
+                    <div id="PlayerHere" className="col-lg-2"></div>
+                    <div className=" col-lg-6 rounded-4 border border-danger border-5">
                         <div className="card my-4 text-white" style={{ background: 'rgba(0, 0, 0, 0)', border: 'none',display: 'flex', justifyContent: 'center', alignItems: 'center'}} id="Box">
                             <Login/>
                         </div>
                     </div>
+                    <div id="TimerHere" className="col-lg-2"></div>
                 </div>
             </div>
             <br/><br/>

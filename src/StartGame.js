@@ -22,7 +22,7 @@ import BestTime from './BestTime';
 export function GameOver(props){
     return(
         <div>
-            <i class="bi bi-heartbreak-fill btn btn-danger btn-lg m-4 fs-2 fw-bold"></i><br/>
+            <i class="bi bi-heartbreak-fill btn btn-danger btn-lg m-4 fs-2 fw-bold" style={{cursor: 'auto'}}></i><br/>
             <button class="bi bi-arrow-clockwise btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<StartGame Level={props.Level} />, document.getElementById('Box'))}></button>
         </div>
     );
@@ -31,8 +31,8 @@ export function GameOver(props){
 function GameWon(props){
     return(
         <div>
-            <a className="btn btn-danger btn-lg m-4 fw-bold">Correct</a>
-            <i class="bi bi-hand-thumbs-up-fill btn btn-danger btn-lg m-4"></i><br/>
+            <a className="btn btn-danger btn-lg m-4 fw-bold" style={{cursor: 'auto'}}>Correct</a>
+            <i class="bi bi-hand-thumbs-up-fill btn btn-danger btn-lg m-4" style={{cursor: 'auto'}}></i><br/>
             <button class="bi bi-arrow-clockwise btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<StartGame Level={props.Level} />, document.getElementById('Box'))}></button>
         </div>
     );
@@ -56,8 +56,8 @@ function CorrectOrNot(props){
             ReactDOM.render(<Player HowManyHearts={(props.HowManyHearts)-1}/>, document.getElementById('PlayerHere'));
             return(
                 <div>
-                    <a className="btn btn-danger btn-lg m-4 fw-bold">Incorrect</a>
-                    <i class="bi bi-hand-thumbs-down-fill btn btn-danger btn-lg m-4"></i>
+                    <a className="btn btn-danger btn-lg m-4 fw-bold" style={{cursor: 'auto'}}>Incorrect</a>
+                    <i class="bi bi-hand-thumbs-down-fill btn btn-danger btn-lg m-4" style={{cursor: 'auto'}}></i>
                 </div>
             );
         }
@@ -69,11 +69,11 @@ function Game(props){
     const [HowManyHearts, setHowManyHearts] = useState(props.HowManyHearts);
     return(
         <div className="card text-white" style={{ background: 'rgba(0, 0, 0, 0)', border: 'none',display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Game</a>
+            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks />, document.getElementById('Box'))}>Game</a>
             <img src={props.question} className="card-img-top" alt="..." style={{objectFit: 'cover'}}/>
             <div id="InputAnswer" className="card-body" style={{ background: 'rgba(0, 0, 0, 0)', border: 'none' }}>
                 <div className="input-group mb-3">
-                    <span className="input-group-text bi bi-123 btn btn-danger" id="AnswerText"></span>
+                    <span className="input-group-text bi bi-123 btn btn-danger" id="AnswerText" style={{cursor: 'auto'}}></span>
                     <input type="text" className="form-control" placeholder="Answer" aria-label="Answer" aria-describedby="AnswerText" ref={inputRef}/>
                     &nbsp;&nbsp;&nbsp;
                     <button type="button" className="bi bi-arrow-return-right btn btn-danger fw-bold" onClick={() => ReactDOM.render(<CorrectOrNot Correct={parseInt(props.solution)} Answer={parseInt(inputRef.current.value)} HowManyHearts={HowManyHearts} setHowManyHearts={setHowManyHearts} stopTimer={props.stopTimer} Level={props.Level} />, document.getElementById('CoN'))}></button>

@@ -20,7 +20,7 @@ import UserProfile from './UserProfile';
 export default function Timer(props){
     return(
         <div className="container-fluids" >
-            <a className="btn btn-danger btn-lg" style={{ position: 'absolute', top: '100px', left: '1200px'}} onClick={() =>  ReactDOM.render(<UserProfile Username="Aaroophan" Best1={1} Best2={2} Played={10} Won={8} />, document.getElementById('Box'))}>
+            <a className="btn btn-danger btn-lg m-3" style={{cursor: 'auto'}}>
                 &nbsp;&nbsp;&nbsp;
                 <p className="fs-1 fw-bold">{props.TimeLeft}</p>
                 <p className="fs-1 fw-bold"><i className="bi bi-hourglass-split"></i></p>

@@ -19,10 +19,10 @@ import UserProfile from './UserProfile';
 function LeaderboardUI(props){
     return(
         <tr>
-            <th><a className="btn btn-danger m-1 fw-bold" style={{width:"50px"}}><i className={`bi bi-${props.Rank}-square-fill`}></i></a></th>
-            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"300px"}}>{props.Name}</a></td>
+            <th><a className="btn btn-danger m-1 fw-bold" style={{width:"40px", cursor: 'auto'}}><i className={`bi bi-${props.Rank}-square-fill`}></i></a></th>
+            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"200px", cursor: 'auto'}}>{props.Name}</a></td>
             <td>
-                <a className="btn btn-danger m-1 fw-bold" style={{width:"100px"}}>
+                <a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}>
                     {props.BestTime}
                 </a>
             </td>
@@ -38,6 +38,8 @@ function UsersOfLeaderboard(props){
         console.log("DATA Users= "+Data.UserID);
         console.log("DATA Name = "+Data.Name);
         console.log("DATA Password = "+Data.Password);
+        console.log("DATA DailyStreaks = "+Data.DailyStreaks);
+        console.log("DATA Rank = "+Data.Rank);
         console.log("DATA BestTime = "+Data.BestTime);
         console.log("DATA GamesPlayed = "+Data.GamesPlayed);
         console.log("DATA GamesWon = "+Data.GamesWon);
@@ -51,7 +53,7 @@ function UsersOfLeaderboard(props){
 export default function Leaderboard(props){
     return(
         <div>
-            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Leaderboard</a>
+            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks />, document.getElementById('Box'))}>Leaderboard</a>
             <table className="text-start">
                 <tbody>
                     <tr id="tr1">

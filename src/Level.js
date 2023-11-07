@@ -19,7 +19,7 @@ import UserProfile from './UserProfile';
 export default function Level(){
     return(
         <div>
-            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Levels</a>
+            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks />, document.getElementById('Box'))}>Levels</a>
             <br/><br/><br/>
             <button className="btn btn-danger btn-lg m-4 fw-bold" onClick={() => ReactDOM.render(<StartGame Level={1} />, document.getElementById('Box'))} style={{width:"200px"}}>Easy</button><br/>
             <button className="btn btn-danger btn-lg m-4 fw-bold" onClick={() => ReactDOM.render(<StartGame Level={2} />, document.getElementById('Box'))} style={{width:"200px"}}>Medium</button><br/>
