@@ -16,20 +16,36 @@ import Level from './Level';
 
 import UserProfile from './UserProfile';
 
-function UsersOfLeaderboard(props){
+function LeaderboardUI(props){
     return(
         <tr>
             <th><a className="btn btn-danger m-1 fw-bold" style={{width:"50px"}}><i className={`bi bi-${props.Rank}-square-fill`}></i></a></th>
-            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"300px"}}>{props.Username}</a></td>
+            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"300px"}}>{props.Name}</a></td>
             <td>
                 <a className="btn btn-danger m-1 fw-bold" style={{width:"100px"}}>
-                    <i className={`bi bi-${props.Best1}-square-fill`}></i>
-                    &nbsp;
-                    <i className={`bi bi-${props.Best2}-square-fill`}></i>
+                    {props.BestTime}
                 </a>
             </td>
         </tr>
     );
+}
+
+function UsersOfLeaderboard(props){
+    fetch('http://localhost:3001/Server/UserProfile')
+    .then(response => response.json())
+    .then(Data => {
+        // Use the Data here
+        console.log("DATA Users= "+Data.UserID);
+        console.log("DATA Name = "+Data.Name);
+        console.log("DATA Password = "+Data.Password);
+        console.log("DATA BestTime = "+Data.BestTime);
+        console.log("DATA GamesPlayed = "+Data.GamesPlayed);
+        console.log("DATA GamesWon = "+Data.GamesWon);
+
+        ReactDOM.render(<LeaderboardUI Rank={props.Rank} Name={Data.Name} BestTime={Data.BestTime} />, document.getElementById('tr'+props.Rank));
+        
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 export default function Leaderboard(props){
@@ -38,15 +54,33 @@ export default function Leaderboard(props){
             <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"400px"}}>Leaderboard</a>
             <table className="text-start">
                 <tbody>
-                    <UsersOfLeaderboard Rank={1} Username="Userdfdfdfname1" Best1={1} Best2={1} />
-                    <UsersOfLeaderboard Rank={2} Username="Username2" Best1={2} Best2={1} />
-                    <UsersOfLeaderboard Rank={3} Username="Username3" Best1={3} Best2={2} />
-                    <UsersOfLeaderboard Rank={4} Username="Username4" Best1={4} Best2={3} />
-                    <UsersOfLeaderboard Rank={5} Username="Username4" Best1={5} Best2={4} />
-                    <UsersOfLeaderboard Rank={6} Username="Username4" Best1={6} Best2={5} />
-                    <UsersOfLeaderboard Rank={7} Username="Username4" Best1={7} Best2={6} />
-                    <UsersOfLeaderboard Rank={8} Username="Username4" Best1={8} Best2={7} />
-                    <UsersOfLeaderboard Rank={9} Username="Username4" Best1={9} Best2={8} />
+                    <tr id="tr1">
+                        <UsersOfLeaderboard Rank={1} />
+                    </tr>
+                    <tr id="tr2">
+                        <UsersOfLeaderboard Rank={2} />
+                    </tr>
+                    <tr id="tr3">
+                        <UsersOfLeaderboard Rank={3} />
+                    </tr> 
+                    <tr id="tr4">
+                        <UsersOfLeaderboard Rank={4} />
+                    </tr> 
+                    <tr id="tr5">
+                        <UsersOfLeaderboard Rank={5} />
+                    </tr> 
+                    <tr id="tr6">
+                        <UsersOfLeaderboard Rank={6} />
+                    </tr> 
+                    <tr id="tr7">
+                        <UsersOfLeaderboard Rank={7} />
+                    </tr> 
+                    <tr id="tr8">
+                        <UsersOfLeaderboard Rank={8} />
+                    </tr> 
+                    <tr id="tr9">
+                        <UsersOfLeaderboard Rank={9} />
+                    </tr> 
                 </tbody>
             </table>
         </div>

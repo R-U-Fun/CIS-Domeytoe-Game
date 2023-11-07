@@ -28,10 +28,27 @@ function Hearts(HeartsProps){
         );
     }
 }
+
+function PlayerUI(props){
+    return(
+        <div className="container-fluids">
+            <a className="btn btn-danger btn-lg" style={{ position: 'absolute', top: '100px', left: '200px'}} onClick={() => ReactDOM.render(<UserProfile />, document.getElementById('Box'))}>
+                &nbsp;&nbsp;&nbsp;
+                <p className="fw-bold"><i className="bi bi-person-fill"></i></p>
+                <p className="fw-bold">{props.Username}</p>
+                <p className="fw-bold">
+                    <Hearts Fill={props.H1}/>
+                    <Hearts Fill={props.H2}/>
+                    <Hearts Fill={props.H3}/>
+                </p>
+            </a>
+        </div>
+    );
+}
+
         
 export default function Player(props){
 
-    let Username = "Aaroophan"
 
     let H1 = true;
     let H2 = true;
@@ -62,19 +79,21 @@ export default function Player(props){
         H2 = true;
         H3 = true;
     }
+
+    fetch('http://localhost:3001/Server/UserProfile')
+    .then(response => response.json())
+    .then(Data => {
+        // Use the Data here
+        console.log("DATA Users= "+Data.UserID);
+        console.log("DATA Name = "+Data.Name);
+        console.log("DATA Password = "+Data.Password);
+        console.log("DATA BestTime = "+Data.BestTime);
+        console.log("DATA GamesPlayed = "+Data.GamesPlayed);
+        console.log("DATA GamesWon = "+Data.GamesWon);
+
+        ReactDOM.render(<PlayerUI Username={Data.Name} H1={H1} H2={H2} H3={H3} />, document.getElementById('PlayerHere'));
+
+    })
+    .catch(error => console.error('Error:', error));
     
-    return(
-        <div className="container-fluids">
-            <a className="btn btn-danger btn-lg" style={{ position: 'absolute', top: '100px', left: '200px'}} onClick={() => ReactDOM.render(<UserProfile Username="Aaroophan" Best1={1} Best2={2} Played={10} Won={8} />, document.getElementById('Box'))}>
-                &nbsp;&nbsp;&nbsp;
-                <p className="fw-bold"><i className="bi bi-person-fill"></i></p>
-                <p className="fw-bold">{Username}</p>
-                <p className="fw-bold">
-                    <Hearts Fill={H1}/>
-                    <Hearts Fill={H2}/>
-                    <Hearts Fill={H3}/>
-                </p>
-            </a>
-        </div>
-    );
 }
