@@ -31,12 +31,14 @@ function LeaderboardUI(props){
 }
 
 function UsersOfLeaderboard(props){
-    fetch('http://localhost:3001/Server/UserProfile')
+    fetch('http://localhost:3214/Server/UserProfile')
     .then(response => response.json())
     .then(Data => {
         // Use the Data here
+        let Data2 = JSON.stringify(Data, null, 2);
+        console.log("DATA Userssss= "+JSON.stringify(Data));
         console.log("DATA Users= "+Data.UserID);
-        console.log("DATA Name = "+Data.Name);
+        console.log("DATA Name = "+Data2.Name);
         console.log("DATA Password = "+Data.Password);
         console.log("DATA DailyStreaks = "+Data.DailyStreaks);
         console.log("DATA Rank = "+Data.Rank);

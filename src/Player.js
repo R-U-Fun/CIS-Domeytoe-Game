@@ -82,7 +82,7 @@ export default function Player(props){
         H3 = true;
     }
 
-    fetch('http://localhost:3001/Server/UserProfile')
+    fetch('http://localhost:3214/Server/UserProfile')
     .then(response => response.json())
     .then(Data => {
         // Use the Data here
