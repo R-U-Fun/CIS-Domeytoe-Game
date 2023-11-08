@@ -36,7 +36,7 @@ function UsersOfLeaderboard(props){
     .then(Data => {
         // Use the Data here
         let Data2 = JSON.stringify(Data, null, 2);
-        console.log("DATA Userssss= "+JSON.stringify(Data));
+        console.log("DATA Userssss= "+JSON.stringify(Data, null, 2));
         console.log("DATA Users= "+Data.UserID);
         console.log("DATA Name = "+Data2.Name);
         console.log("DATA Password = "+Data.Password);
