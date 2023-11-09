@@ -31,9 +31,7 @@ mongoose.connect('mongodb+srv://Aaroophan:AaroophanMongoDB@cluster0.9y1xdpc.mong
     });
 });*/
 
-
-app.get('/Server/UserProfile/:CurrentUserName', (req, res) => {
-    let User = mongoose.model('User', new mongoose.Schema({
+let User = mongoose.model('User', new mongoose.Schema({
         UserID: Number,
         Name: String,
         Password: String,
@@ -43,6 +41,8 @@ app.get('/Server/UserProfile/:CurrentUserName', (req, res) => {
         GamesPlayed: Number,
         GamesWon: Number
     }));
+
+app.get('/Server/UserProfile/:CurrentUserName', (req, res) => {
     let CurrentUserName = req.params.CurrentUserName;
     console.log(CurrentUserName);
     User.findOne({ "Name": CurrentUserName })
