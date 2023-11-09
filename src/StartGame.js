@@ -19,6 +19,35 @@ import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
 import BestTime from './BestTime';
 
+function UpdateGamesPlayed(CurrentUserName){
+
+    fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
+        .then(response => response.json())
+        .then(Data => {
+            let GamesPlayed = Data.GamesPlayed;
+            if(GamesPlayed === null){
+                GamesPlayed=1;
+            }
+            else{
+                GamesPlayed = GamesPlayed + 1;
+            }
+            fetch(`http://localhost:3214/Server/GamesPlayed/${CurrentUserName}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        GamesPlayed: GamesPlayed,
+                    }),
+                })
+                .catch((error) => {
+                    console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
+                });
+                
+        })
+        .catch(error => console.error('Error:', error));
+}
+
 export function GameOver(props){
     return(
         <div>
@@ -86,7 +115,11 @@ function Game(props){
 }
         
 export default function StartGame(props){
-    
+
+    let CurrentUserName = props.CurrentUserName;
+
+    UpdateGamesPlayed(CurrentUserName);
+
     let TimeLeft;
     let TimeElapsed = 0;
     let Level = parseInt(props.Level);
