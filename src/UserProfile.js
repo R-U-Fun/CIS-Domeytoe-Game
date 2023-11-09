@@ -61,7 +61,8 @@ export default function UserProfile(props){
     ReactDOM.render(<div></div>, document.getElementById('TimerHere'));
     ReactDOM.render(<div></div>, document.getElementById('PlayerHere')); 
     
-    fetch('http://localhost:3214/Server/UserProfile')
+    let CurrentUserName = 'Aaroophan1';
+    fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
     .then(response => response.json())
     .then(Data => {
         // Use the Data here

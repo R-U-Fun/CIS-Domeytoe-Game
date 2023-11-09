@@ -23,8 +23,10 @@ let User = mongoose.model('User', new mongoose.Schema({
         GamesWon: Number
 }));
 
-app.get('/Server/UserProfile', (req, res) => {
-    User.findOne({ "Name": "Aaroophan2" })
+app.get('/Server/UserProfile/:CurrentUserName', (req, res) => {
+    let CurrentUserName = req.params.CurrentUserName;
+    console.log(CurrentUserName);
+    User.findOne({ "Name": CurrentUserName })
     .then(user => {
         if (user) {
             console.log(user);

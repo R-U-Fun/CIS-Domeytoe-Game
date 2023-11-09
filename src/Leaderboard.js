@@ -31,7 +31,8 @@ function LeaderboardUI(props){
 }
 
 function UsersOfLeaderboard(props){
-    fetch('http://localhost:3214/Server/UserProfile')
+    let CurrentUserName = 'Aaroophan1';
+    fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
     .then(response => response.json())
     .then(Data => {
         // Use the Data here
@@ -45,7 +46,6 @@ function UsersOfLeaderboard(props){
         console.log("DATA GamesWon = "+Data.GamesWon);
 
         ReactDOM.render(<LeaderboardUI Rank={props.Rank} Name={Data.Name} BestTime={Data.BestTime} />, document.getElementById('tr'+props.Rank));
-        
     })
     .catch(error => console.error('Error:', error));
 }

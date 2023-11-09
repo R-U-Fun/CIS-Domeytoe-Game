@@ -82,7 +82,8 @@ export default function Player(props){
         H3 = true;
     }
 
-    fetch('http://localhost:3214/Server/UserProfile')
+    let CurrentUserName = 'Aaroophan1';
+    fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
     .then(response => response.json())
     .then(Data => {
         // Use the Data here
