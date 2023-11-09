@@ -19,7 +19,7 @@ import Leaderboard from './Leaderboard';
 function UserProfileUI(props){
     return(
         <div>
-        <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks />, document.getElementById('Box'))}>Profile</a>
+        <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks CurrentUserName={props.CurrentUserName} />, document.getElementById('Box'))}>Profile</a>
         <br/>
             <table className="text-start">
                 <tbody>
@@ -61,7 +61,7 @@ export default function UserProfile(props){
     ReactDOM.render(<div></div>, document.getElementById('TimerHere'));
     ReactDOM.render(<div></div>, document.getElementById('PlayerHere')); 
     
-    let CurrentUserName = 'Aaroophan1';
+    let CurrentUserName= props.CurrentUserName;
     fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
     .then(response => response.json())
     .then(Data => {
@@ -75,7 +75,7 @@ export default function UserProfile(props){
         console.log("DATA GamesPlayed = "+Data.GamesPlayed);
         console.log("DATA GamesWon = "+Data.GamesWon);
 
-        ReactDOM.render(<UserProfileUI UserID={Data.UserID} Name={Data.Name} DailyStreaks={Data.DailyStreaks} Rank={Data.Rank} BestTime={Data.BestTime} GamesPlayed={Data.GamesPlayed} GamesWon={Data.GamesWon} />, document.getElementById('Box'));
+        ReactDOM.render(<UserProfileUI CurrentUserName={props.CurrentUserName} UserID={Data.UserID} Name={Data.Name} DailyStreaks={Data.DailyStreaks} Rank={Data.Rank} BestTime={Data.BestTime} GamesPlayed={Data.GamesPlayed} GamesWon={Data.GamesWon} />, document.getElementById('Box'));
 
     })
     .catch(error => console.error('Error:', error));

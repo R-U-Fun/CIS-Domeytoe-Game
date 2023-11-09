@@ -19,7 +19,7 @@ import UserProfile from './UserProfile';
 export default function Header(){
     return(
         <div className="container-fluids">
-            <nav className="navbar navbar-expand-md navbar-dark fixed-top" style={{cursor:'default', background: 'rgba(10, 0, 0, 0)' }} onClick={() => ReactDOM.render(<HomeLinks />, document.getElementById('Box'))}>
+            <nav className="navbar navbar-expand-md navbar-dark fixed-top" style={{cursor:'default', background: 'rgba(10, 0, 0, 0)' }}>
                 &nbsp;&nbsp;&nbsp;
                 <a><img src="https://cdn-icons-png.flaticon.com/512/1202/1202125.png" id="AaroophanIMG" height="35px" width="35px" className="rounded-5" /></a>
                 &nbsp;&nbsp;&nbsp;

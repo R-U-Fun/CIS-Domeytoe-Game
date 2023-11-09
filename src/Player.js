@@ -32,7 +32,7 @@ function Hearts(HeartsProps){
 function PlayerUI(props){
     return(
         <div className="container-fluids">
-            <a className="btn btn-danger btn-lg m-3"  onClick={() => ReactDOM.render(<UserProfile />, document.getElementById('Box'))}>
+            <a className="btn btn-danger btn-lg m-3"  onClick={() => ReactDOM.render(<UserProfile CurrentUserName={props.CurrentUserName} />, document.getElementById('Box'))}>
                 &nbsp;&nbsp;&nbsp;
                 <p className="fw-bold"><i className="bi bi-person-fill"></i></p>
                 <p className="fw-bold">{props.Username}</p>
@@ -82,7 +82,7 @@ export default function Player(props){
         H3 = true;
     }
 
-    let CurrentUserName = 'Aaroophan1';
+    let CurrentUserName=props.CurrentUserName;
     fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
     .then(response => response.json())
     .then(Data => {
@@ -96,7 +96,7 @@ export default function Player(props){
         console.log("DATA GamesPlayed = "+Data.GamesPlayed);
         console.log("DATA GamesWon = "+Data.GamesWon);
 
-        ReactDOM.render(<PlayerUI Username={Data.Name} DailyStreaks={Data.DailyStreaks} Rank={Data.Rank} H1={H1} H2={H2} H3={H3} />, document.getElementById('PlayerHere'));
+        ReactDOM.render(<PlayerUI CurrentUserName={props.CurrentUserName} Username={Data.Name} DailyStreaks={Data.DailyStreaks} Rank={Data.Rank} H1={H1} H2={H2} H3={H3} />, document.getElementById('PlayerHere'));
 
     })
     .catch(error => console.error('Error:', error));
