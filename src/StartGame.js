@@ -19,6 +19,35 @@ import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
 import BestTime from './BestTime';
 
+function UpdateGamesWon(CurrentUserName){
+
+    fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
+        .then(response => response.json())
+        .then(Data => {
+            let GamesWon = Data.GamesWon;
+            if(GamesWon === null){
+                GamesWon=1;
+            }
+            else{
+                GamesWon = GamesWon + 1;
+            }
+            fetch(`http://localhost:3214/Server/GamesWon/${CurrentUserName}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        GamesWon: GamesWon,
+                    }),
+                })
+                .catch((error) => {
+                    console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
+                });
+                
+        })
+        .catch(error => console.error('Error:', error));
+}
+
 function UpdateGamesPlayed(CurrentUserName){
 
     fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
@@ -58,6 +87,8 @@ export function GameOver(props){
 }
 
 function GameWon(props){
+    let CurrentUserName = props.CurrentUserName;
+    UpdateGamesWon(CurrentUserName);
     return(
         <div>
             <a className="btn btn-danger btn-lg m-4 fw-bold" style={{cursor: 'auto'}}>Correct</a>

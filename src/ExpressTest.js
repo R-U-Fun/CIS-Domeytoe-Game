@@ -93,6 +93,18 @@ app.put('/Server/GamesPlayed/:CurrentUserName', (req, res) => {
     });
 });
 
+app.put('/Server/GamesWon/:CurrentUserName', (req, res) => {
+    let CurrentUserName = req.params.CurrentUserName;
+    let newGamesWon = req.body.GamesWon;
+    User.findOneAndUpdate({ "Name": CurrentUserName }, { GamesWon: newGamesWon }, { new: true })
+    .then(user => {
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! GAMES WON UPDATED");
+    })
+    .catch(err => {
+        console.log(err);
+    });
+});
+
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
