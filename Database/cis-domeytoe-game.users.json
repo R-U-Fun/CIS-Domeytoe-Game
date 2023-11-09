@@ -1,18 +1,5 @@
 [{
   "_id": {
-    "$oid": "654ca6c0498293a90220c3da"
-  },
-  "UserID": 1,
-  "Name": "Aaroophan1",
-  "Password": "AaroophanDT1",
-  "DailyStreaks": 4,
-  "Rank": 2,
-  "BestTime": 12,
-  "GamesPlayed": 10,
-  "GamesWon": 8
-},
-{
-  "_id": {
     "$oid": "654ca6c0498293a90220c3db"
   },
   "UserID": 2,
@@ -62,4 +49,51 @@
   "BestTime": 12,
   "GamesPlayed": 10,
   "GamesWon": 8
+},
+{
+  "_id": {
+    "$oid": "654ca6c0498293a90220c3da"
+  },
+  "UserID": 1,
+  "Name": "Aaroophan1",
+  "Password": "AaroophanDT1",
+  "DailyStreaks": 4,
+  "Rank": 2,
+  "BestTime": 12,
+  "GamesPlayed": 10,
+  "GamesWon": 8
+},
+{
+  "_id": {
+    "$oid": "654d013e498293a90220c3e1"
+  },
+  "Users": 5
+},
+{
+  "_id": {
+    "$oid": "654d29b9c5cbb5b11dbab1ab"
+  },
+  "UserID": 6,
+  "Name": "BOI",
+  "Password": "BOI",
+  "DailyStreaks": 0,
+  "Rank": 0,
+  "BestTime": 0,
+  "GamesPlayed": 0,
+  "GamesWon": 0,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654d2ab4e6134bfc65efd6b8"
+  },
+  "UserID": null,
+  "Name": "QW",
+  "Password": "QW",
+  "DailyStreaks": null,
+  "Rank": null,
+  "BestTime": null,
+  "GamesPlayed": null,
+  "GamesWon": null,
+  "__v": 0
 }]

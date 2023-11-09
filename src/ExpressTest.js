@@ -69,6 +69,19 @@ app.get('/Server/UserProfile/:CurrentUserName', (req, res) => {
     });
 });
 
+app.put('/Server/BestTime/:CurrentUserName', (req, res) => {
+    let CurrentUserName = req.params.CurrentUserName;
+    let newBestTime = req.body.BestTime;
+    User.findOneAndUpdate({ "Name": CurrentUserName }, { BestTime: newBestTime }, { new: true })
+    .then(user => {
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BEST TIME UPDATED");
+    })
+    .catch(err => {
+        console.log(err);
+    });
+});
+
+
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });

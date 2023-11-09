@@ -23,23 +23,23 @@ function RegisterHandle(props){
     let NewUserName = props.NewUserName;
     let NewPassword = props.NewPassword;
     let NewConfirmPassword = props.NewConfirmPassword;
+
     if( NewUserName && NewPassword && NewConfirmPassword){
         if(NewPassword === NewConfirmPassword){
-            
             fetch('http://localhost:3214/Server/Register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    userID: 6,
+                    userID: null,
                     username: NewUserName,
                     password: NewPassword,
-                    dailyStreaks: 0,
-                    rank: 0,
-                    bestTime: 0,
-                    gamesPlayed: 0,
-                    gamesWon: 0
+                    dailyStreaks: null,
+                    rank: null,
+                    bestTime: null,
+                    gamesPlayed: null,
+                    gamesWon: null
                 })
             })
             .then(response => response.json())

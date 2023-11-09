@@ -17,13 +17,31 @@ import Level from './Level';
 import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
 
-
 export default function BestTime(props){
     let TimeElapsed = parseInt(props.TimeElapsed);
-    let BestTime = 40;
-    if(TimeElapsed < BestTime){
-        BestTime = TimeElapsed;
-        alert("New Best = "+ BestTime);
-    }
+    let CurrentUserName = props.CurrentUserName;
+
+    fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
+        .then(response => response.json())
+        .then(Data => {
+            if(TimeElapsed < Data.BestTime || Data.BestTime === null){
+                alert("New Best Time = "+ TimeElapsed +" Sec");
+                
+                fetch(`http://localhost:3214/Server/BestTime/${CurrentUserName}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        BestTime: TimeElapsed,
+                    }),
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
+            }
+        })
+        .catch(error => console.error('Error:', error));
     return(null);
 }
