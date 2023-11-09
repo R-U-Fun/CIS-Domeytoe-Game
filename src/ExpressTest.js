@@ -12,7 +12,28 @@ mongoose.connect('mongodb+srv://Aaroophan:AaroophanMongoDB@cluster0.9y1xdpc.mong
 })
 .catch(err => console.log(err));
 
-let User = mongoose.model('User', new mongoose.Schema({
+/*app.post('/Server/NewProfile/:NEWUSER', (req, res) => {
+    let NEWUSER = req.params.NEWUSER;
+    let newUser = new User({
+        UserID: 6,
+        Name: "NEWUSER",
+        Password: "NEWPASSWORD",
+        DailyStreaks: 0,
+        Rank: 0,
+        BestTime: 0,
+        GamesPlayed: 0,
+        GamesWon: 0
+    });
+
+    newUser.save((err, savedUser) => {
+        if (err) return console.error(err);
+        console.log("User saved to collection:", savedUser);
+    });
+});*/
+
+
+app.get('/Server/UserProfile/:CurrentUserName', (req, res) => {
+    let User = mongoose.model('User', new mongoose.Schema({
         UserID: Number,
         Name: String,
         Password: String,
@@ -21,9 +42,7 @@ let User = mongoose.model('User', new mongoose.Schema({
         BestTime: Number,
         GamesPlayed: Number,
         GamesWon: Number
-}));
-
-app.get('/Server/UserProfile/:CurrentUserName', (req, res) => {
+    }));
     let CurrentUserName = req.params.CurrentUserName;
     console.log(CurrentUserName);
     User.findOne({ "Name": CurrentUserName })

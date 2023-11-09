@@ -19,12 +19,46 @@ import Level from './Level';
 import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
 
+function LoginHandle(props){
+    let CurrentUserName = props.CurrentUserName;
+    let CurrentPassword = props.CurrentPassword;
+    if(CurrentUserName && CurrentPassword){
+        fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
+        .then(response => response.json())
+        .then(Data => {
+            if(Data && CurrentPassword === Data.Password){
+                // Use the Data here
+                console.log("DATA Users= "+Data.UserID);
+                console.log("DATA Name = "+Data.Name);
+                console.log("DATA Password = "+Data.Password);
+                console.log("DATA DailyStreaks = "+Data.DailyStreaks);
+                console.log("DATA Rank = "+Data.Rank);
+                console.log("DATA BestTime = "+Data.BestTime);
+                console.log("DATA GamesPlayed = "+Data.GamesPlayed);
+                console.log("DATA GamesWon = "+Data.GamesWon);
+
+                console.log("LOGGGGGGGIIIIIIIIINNNNNNNNNN");
+                ReactDOM.render(<HomeLinks CurrentUserName={props.CurrentUserName} />, document.getElementById('Box'));
+            }
+            else{
+                ReactDOM.render(<Login />, document.getElementById('Box'));
+                alert("Invalid Username & Password");
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    else{
+        ReactDOM.render(<Login />, document.getElementById('Box'));
+        alert("Please fill Username & Password");
+    }
+}
+
 export default function Login(){
     const usernameRef = useRef();
     const passwordRef = useRef();
     return(
         <div>
-            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px", cursor: 'auto'}}>Login</a>
+            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px", cursor: 'auto'}} onClick={() => ReactDOM.render(<Login />, document.getElementById('Box'))}>Login</a>
             <br/><br/><br/><br/>
             <div className="input-group mb-3">
                 <span className="input-group-text btn btn-danger" id="basic-addon1"><i className="bi bi-at"></i></span>
@@ -35,7 +69,7 @@ export default function Login(){
                 <input type="password" className="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" ref={passwordRef}/>
             </div>
             <button type="button" className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<Register />, document.getElementById('Box'))}><i className="bi bi-pen"></i> Register</button>
-            <button type="button" className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<HomeLinks CurrentUserName={usernameRef.current.value} CurrentPassword={passwordRef.current.value} />, document.getElementById('Box'))}><i className="bi bi-door-closed"></i> Login</button>
+            <button type="button" className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<LoginHandle CurrentUserName={usernameRef.current.value} CurrentPassword={passwordRef.current.value} />, document.getElementById('Box'))}><i className="bi bi-door-closed"></i> Login</button>
             <br/><br/><br/><br/><br/>
         </div>
     );
