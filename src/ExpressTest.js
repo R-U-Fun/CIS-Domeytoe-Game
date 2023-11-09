@@ -13,7 +13,6 @@ mongoose.connect('mongodb+srv://Aaroophan:AaroophanMongoDB@cluster0.9y1xdpc.mong
 .catch(err => console.log(err));
 
 let User = mongoose.model('User', new mongoose.Schema({
-    //User_Aaroophan4:{
         UserID: Number,
         Name: String,
         Password: String,
@@ -22,11 +21,10 @@ let User = mongoose.model('User', new mongoose.Schema({
         BestTime: Number,
         GamesPlayed: Number,
         GamesWon: Number
-    //}
 }));
 
 app.get('/Server/UserProfile', (req, res) => {
-    User.find({ "User_Aaroophan4.Name": "Aaroophan4" })
+    User.findOne({ "Name": "Aaroophan2" })
     .then(user => {
         if (user) {
             console.log(user);

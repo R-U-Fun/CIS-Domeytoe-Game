@@ -1,57 +1,65 @@
 [{
-  "1": {
-    "UserID": 1,
-    "Name": "Aaroophan1",
-    "Password": "AaroophanDT1",
-    "DailyStreaks": 4,
-    "Rank": 2,
-    "BestTime": 12,
-    "GamesPlayed": 10,
-    "GamesWon": 8
-  },
-  "2": {
-    "UserID": 2,
-    "Name": "Aaroophan2",
-    "Password": "AaroophanDT2",
-    "DailyStreaks": 4,
-    "Rank": 2,
-    "BestTime": 12,
-    "GamesPlayed": 10,
-    "GamesWon": 8
-  },
-  "3": {
-    "UserID": 3,
-    "Name": "Aaroophan3",
-    "Password": "AaroophanDT3",
-    "DailyStreaks": 4,
-    "Rank": 2,
-    "BestTime": 12,
-    "GamesPlayed": 10,
-    "GamesWon": 8
-  },
   "_id": {
-    "$oid": "654bc6df498293a90220c3d9"
+    "$oid": "654ca6c0498293a90220c3da"
   },
-  "Users": 2,
-  "User_Aaroophan4": {
-    "UserID": 4,
-    "Name": "Aaroophan4",
-    "Password": "AaroophanDT4",
-    "DailyStreaks": 4,
-    "Rank": 2,
-    "BestTime": 12,
-    "GamesPlayed": 10,
-    "GamesWon": 8
+  "UserID": 1,
+  "Name": "Aaroophan1",
+  "Password": "AaroophanDT1",
+  "DailyStreaks": 4,
+  "Rank": 2,
+  "BestTime": 12,
+  "GamesPlayed": 10,
+  "GamesWon": 8
+},
+{
+  "_id": {
+    "$oid": "654ca6c0498293a90220c3db"
   },
-  "User_Aaroophan5": {
-    "UserID": 5,
-    "Name": "Aaroophan5",
-    "Password": "AaroophanDT5",
-    "DailyStreaks": 4,
-    "Rank": 2,
-    "BestTime": 12,
-    "GamesPlayed": 10,
-    "GamesWon": 8
+  "UserID": 2,
+  "Name": "Aaroophan2",
+  "Password": "AaroophanDT2",
+  "DailyStreaks": 4,
+  "Rank": 2,
+  "BestTime": 12,
+  "GamesPlayed": 10,
+  "GamesWon": 8
+},
+{
+  "_id": {
+    "$oid": "654ca6c0498293a90220c3dd"
   },
-  "Name": "AaroophanOUTER"
+  "UserID": 3,
+  "Name": "Aaroophan3",
+  "Password": "AaroophanDT3",
+  "DailyStreaks": 4,
+  "Rank": 2,
+  "BestTime": 12,
+  "GamesPlayed": 10,
+  "GamesWon": 8
+},
+{
+  "_id": {
+    "$oid": "654ca6c0498293a90220c3de"
+  },
+  "UserID": 4,
+  "Name": "Aaroophan4",
+  "Password": "AaroophanDT4",
+  "DailyStreaks": 4,
+  "Rank": 2,
+  "BestTime": 12,
+  "GamesPlayed": 10,
+  "GamesWon": 8
+},
+{
+  "_id": {
+    "$oid": "654ca6c0498293a90220c3df"
+  },
+  "UserID": 5,
+  "Name": "Aaroophan5",
+  "Password": "AaroophanDT5",
+  "DailyStreaks": 4,
+  "Rank": 2,
+  "BestTime": 12,
+  "GamesPlayed": 10,
+  "GamesWon": 8
 }]

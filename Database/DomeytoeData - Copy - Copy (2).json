@@ -1,0 +1,62 @@
+[
+  {
+    "UserID": 1,
+    "Name": "Aaroophan1",
+    "Password": "AaroophanDT1",
+    "DailyStreaks": 4,
+    "Rank": 2,
+    "BestTime": 12,
+    "GamesPlayed": 10,
+    "GamesWon": 8
+  },
+  {
+    "UserID": 2,
+    "Name": "Aaroophan2",
+    "Password": "AaroophanDT2",
+    "DailyStreaks": 4,
+    "Rank": 2,
+    "BestTime": 12,
+    "GamesPlayed": 10,
+    "GamesWon": 8
+  },
+  {
+    "UserID": 4,
+    "Name": "Aaroophan4",
+    "Password": "AaroophanDT4",
+    "DailyStreaks": 4,
+    "Rank": 2,
+    "BestTime": 12,
+    "GamesPlayed": 10,
+    "GamesWon": 8
+  },
+  {
+    "UserID": 3,
+    "Name": "Aaroophan3",
+    "Password": "AaroophanDT3",
+    "DailyStreaks": 4,
+    "Rank": 2,
+    "BestTime": 12,
+    "GamesPlayed": 10,
+    "GamesWon": 8
+  },
+  {
+    "UserID": 4,
+    "Name": "Aaroophan4",
+    "Password": "AaroophanDT4",
+    "DailyStreaks": 4,
+    "Rank": 2,
+    "BestTime": 12,
+    "GamesPlayed": 10,
+    "GamesWon": 8
+  },
+  {
+    "UserID": 5,
+    "Name": "Aaroophan5",
+    "Password": "AaroophanDT5",
+    "DailyStreaks": 4,
+    "Rank": 2,
+    "BestTime": 12,
+    "GamesPlayed": 10,
+    "GamesWon": 8
+  }
+]
