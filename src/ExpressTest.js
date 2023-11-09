@@ -5,6 +5,9 @@ const port = 3214;
 const mongoose = require('mongoose');
 
 app.use(cors());
+app.use(cors({ origin: 'http://localhost:3000' }));
+
+app.use(express.json());
 
 mongoose.connect('mongodb+srv://Aaroophan:AaroophanMongoDB@cluster0.9y1xdpc.mongodb.net/cis-domeytoe-game', { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
@@ -12,24 +15,29 @@ mongoose.connect('mongodb+srv://Aaroophan:AaroophanMongoDB@cluster0.9y1xdpc.mong
 })
 .catch(err => console.log(err));
 
-/*app.post('/Server/NewProfile/:NEWUSER', (req, res) => {
-    let NEWUSER = req.params.NEWUSER;
+app.post('/Server/Register', (req, res) => {
     let newUser = new User({
-        UserID: 6,
-        Name: "NEWUSER",
-        Password: "NEWPASSWORD",
-        DailyStreaks: 0,
-        Rank: 0,
-        BestTime: 0,
-        GamesPlayed: 0,
-        GamesWon: 0
+        UserID: req.body.userID,
+        Name: req.body.username,
+        Password: req.body.password,
+        DailyStreaks: req.body.dailyStreaks,
+        Rank: req.body.rank,
+        BestTime: req.body.bestTime,
+        GamesPlayed: req.body.gamesPlayed,
+        GamesWon: req.body.gamesWon
     });
 
-    newUser.save((err, savedUser) => {
-        if (err) return console.error(err);
+    newUser.save()
+    .then(savedUser => {
         console.log("User saved to collection:", savedUser);
+        res.status(200).json(savedUser);
+    })
+    .catch(err => {
+        console.error(err);
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa "+err);
+        res.status(500).json({ error: err.toString() });
     });
-});*/
+});
 
 let User = mongoose.model('User', new mongoose.Schema({
         UserID: Number,
@@ -40,7 +48,7 @@ let User = mongoose.model('User', new mongoose.Schema({
         BestTime: Number,
         GamesPlayed: Number,
         GamesWon: Number
-    }));
+}));
 
 app.get('/Server/UserProfile/:CurrentUserName', (req, res) => {
     let CurrentUserName = req.params.CurrentUserName;

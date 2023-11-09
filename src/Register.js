@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import React, { useState, useRef } from 'react';
+import axios from 'axios';
 
 import Main from './App';
 import Header from './Header';
@@ -24,8 +25,33 @@ function RegisterHandle(props){
     let NewConfirmPassword = props.NewConfirmPassword;
     if( NewUserName && NewPassword && NewConfirmPassword){
         if(NewPassword === NewConfirmPassword){
-            console.log("REGISTER");
-            ReactDOM.render(<Login />, document.getElementById('Box'));
+            
+            fetch('http://localhost:3214/Server/Register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userID: 6,
+                    username: NewUserName,
+                    password: NewPassword,
+                    dailyStreaks: 0,
+                    rank: 0,
+                    bestTime: 0,
+                    gamesPlayed: 0,
+                    gamesWon: 0
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("REGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGg");
+                console.log(data);
+                ReactDOM.render(<Login />, document.getElementById('Box'));
+            })
+            .catch(error => {
+                console.error(error);
+                console.log("Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror registering new user     "+error);
+            });
         }
         else{
             ReactDOM.render(<Register />, document.getElementById('Box'));
