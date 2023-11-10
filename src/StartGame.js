@@ -129,7 +129,8 @@ function Game(props){
     const [HowManyHearts, setHowManyHearts] = useState(props.HowManyHearts);
     return(
         <div className="card text-white" style={{ background: 'rgba(0, 0, 0, 0)', border: 'none',display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks CurrentUserName={props.CurrentUserName} />, document.getElementById('Box'))}>Game</a>
+            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} 
+                onClick={() => ReactDOM.render(<HomeLinks CurrentUserName={props.CurrentUserName} />, document.getElementById('Box'))}>Game</a>
             <img src={props.question} className="card-img-top" alt="..." style={{objectFit: 'cover'}}/>
             <div id="InputAnswer" className="card-body" style={{ background: 'rgba(0, 0, 0, 0)', border: 'none' }}>
                 <div className="input-group mb-3">
@@ -174,7 +175,13 @@ export default function StartGame(props){
             TimeElapsed = (TimeElapsed + 1);
             console.log(TimeLeft);
             console.log(TimeElapsed);
-            ReactDOM.render(<Timer Level={props.Level} TimeLeft={TimeLeft} TimeElapsed={TimeElapsed} />, document.getElementById('TimerHere'));
+            if(document.getElementById('AnswerText')){
+                ReactDOM.render(<Timer Level={props.Level} TimeLeft={TimeLeft} TimeElapsed={TimeElapsed} />, document.getElementById('TimerHere'));
+            }
+            else{
+                clearInterval(OneSecPass);
+            }
+            
         } else {
             clearInterval(OneSecPass);
             ReactDOM.render(<GameOver CurrentUserName={props.CurrentUserName} Level={props.Level}/>, document.getElementById('InputAnswer'));
@@ -189,8 +196,8 @@ export default function StartGame(props){
     fetch('https://marcconrad.com/uob/tomato/api.php')
         .then(response => response.json())
         .then(data => {
-            console.log("API - Question = "+data.question);
-            console.log("API - sSolution = "+data.solution);
+            console.log("TOMATO API - Question = "+data.question);
+            console.log("TOMATO API - Solution = "+data.solution);
             ReactDOM.render(<Game CurrentUserName={props.CurrentUserName} question={data.question} solution= {data.solution} HowManyHearts={3} Level={props.Level} stopTimer={stopTimer} />, document.getElementById('Box'));
         })
         .catch(error => console.error('Error:', error));

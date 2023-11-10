@@ -17,21 +17,6 @@ import Level from './Level';
 import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
 
-function updateRanks(){
-  fetch('http://localhost:3214/Server/UpdateRanks', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log(" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA data.message : "+data.message);
-      // You can perform additional actions after updating ranks if needed
-    })
-    .catch(error => console.error('Error:', error));
-}
-
 export default function BestTime(props){
     let TimeElapsed = parseInt(props.TimeElapsed);
     let CurrentUserName = props.CurrentUserName;
@@ -53,7 +38,15 @@ export default function BestTime(props){
                 .catch((error) => {
                     console.error('Error:', error);
                 });
-                updateRanks();
+                
+                fetch('http://localhost:3214/Server/UpdateRanks', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .catch(error => console.error('Error:', error));
+
                 alert("New Best Time = "+ TimeElapsed +" Sec");
             }
         })
