@@ -6,7 +6,7 @@
   "Name": "Aaroophan2",
   "Password": "AaroophanDT2",
   "DailyStreaks": 4,
-  "Rank": 2,
+  "Rank": 1,
   "BestTime": 12,
   "GamesPlayed": 10,
   "GamesWon": 8
@@ -20,7 +20,7 @@
   "Password": "AaroophanDT3",
   "DailyStreaks": 4,
   "Rank": 2,
-  "BestTime": 12,
+  "BestTime": 5,
   "GamesPlayed": 10,
   "GamesWon": 8
 },
@@ -32,8 +32,8 @@
   "Name": "Aaroophan4",
   "Password": "AaroophanDT4",
   "DailyStreaks": 4,
-  "Rank": 2,
-  "BestTime": 12,
+  "Rank": 3,
+  "BestTime": 4,
   "GamesPlayed": 10,
   "GamesWon": 8
 },
@@ -45,8 +45,8 @@
   "Name": "Aaroophan5",
   "Password": "AaroophanDT5",
   "DailyStreaks": 4,
-  "Rank": 2,
-  "BestTime": 12,
+  "Rank": 4,
+  "BestTime": 2,
   "GamesPlayed": 10,
   "GamesWon": 8
 },
@@ -58,7 +58,7 @@
   "Name": "Aaroophan1",
   "Password": "AaroophanDT1",
   "DailyStreaks": 4,
-  "Rank": 2,
+  "Rank": 5,
   "BestTime": 12,
   "GamesPlayed": 10,
   "GamesWon": 8
@@ -67,7 +67,7 @@
   "_id": {
     "$oid": "654d013e498293a90220c3e1"
   },
-  "Users": 5
+  "Users": 6
 },
 {
   "_id": {
@@ -77,9 +77,9 @@
   "Name": "BOI",
   "Password": "BOI",
   "DailyStreaks": 0,
-  "Rank": 0,
-  "BestTime": 0,
-  "GamesPlayed": 0,
+  "Rank": 6,
+  "BestTime": 60,
+  "GamesPlayed": 4,
   "GamesWon": 0,
   "__v": 0
 },
@@ -92,8 +92,22 @@
   "Password": "QW",
   "DailyStreaks": null,
   "Rank": null,
-  "BestTime": null,
-  "GamesPlayed": null,
-  "GamesWon": null,
+  "BestTime": 6,
+  "GamesPlayed": 13,
+  "GamesWon": 4,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654e01ef1f0c3c22df5f0e2d"
+  },
+  "UserID": null,
+  "Name": "ASAS",
+  "Password": "ASAS",
+  "DailyStreaks": 0,
+  "Rank": 7,
+  "BestTime": 60,
+  "GamesPlayed": 0,
+  "GamesWon": 0,
   "__v": 0
 }]

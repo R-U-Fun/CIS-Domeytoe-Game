@@ -69,6 +69,25 @@ app.get('/Server/UserProfile/:CurrentUserName', (req, res) => {
     });
 });
 
+app.get('/Server/Leaderboard/:Rank', (req, res) => {
+    let Rank = req.params.Rank;
+    console.log(Rank);
+    User.findOne({ "Rank": Rank })
+    .then(user => {
+        if (user) {
+            console.log(user);
+            console.log("HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHHAHAHA USER IS  FOUND");
+            res.json(user);
+        } else {
+            console.log("######################################################### USER NOT FOUND");
+            res.json(user);
+        }
+    })
+    .catch(err => {
+        console.log(err);
+    });
+});
+
 app.put('/Server/BestTime/:CurrentUserName', (req, res) => {
     let CurrentUserName = req.params.CurrentUserName;
     let newBestTime = req.body.BestTime;

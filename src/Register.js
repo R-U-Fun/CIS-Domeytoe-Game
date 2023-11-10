@@ -35,11 +35,11 @@ function RegisterHandle(props){
                     userID: null,
                     username: NewUserName,
                     password: NewPassword,
-                    dailyStreaks: null,
-                    rank: null,
-                    bestTime: null,
-                    gamesPlayed: null,
-                    gamesWon: null
+                    dailyStreaks: 0,
+                    rank: 0,
+                    bestTime: 60,
+                    gamesPlayed: 0,
+                    gamesWon: 0
                 })
             })
             .then(response => response.json())

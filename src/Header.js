@@ -21,9 +21,9 @@ export default function Header(){
         <div className="container-fluids">
             <nav className="navbar navbar-expand-md navbar-dark fixed-top" style={{cursor:'default', background: 'rgba(10, 0, 0, 0)' }}>
                 &nbsp;&nbsp;&nbsp;
-                <a><img src="https://cdn-icons-png.flaticon.com/512/1202/1202125.png" id="AaroophanIMG" height="35px" width="35px" className="rounded-5" onClick={() => ReactDOM.render(<Login />, document.getElementById('Box'))}/></a>
+                <a><img src="https://cdn-icons-png.flaticon.com/512/1202/1202125.png" id="AaroophanIMG" height="35px" width="35px" className="rounded-5" /></a>
                 &nbsp;&nbsp;&nbsp;
-                <a className="navbar-brand fs-2 fw-bold font-arial" id="PageNameA" style={{ color:'rgba(117, 0, 0, 0.9)' }} onClick={() => ReactDOM.render(<Login />, document.getElementById('Box'))}>Domeytoe</a>
+                <a className="navbar-brand fs-2 fw-bold font-arial" id="PageNameA" style={{ color:'rgba(117, 0, 0, 0.9)' }} >Domeytoe</a>
             </nav>
         </div>
     );

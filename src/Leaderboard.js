@@ -31,8 +31,8 @@ function LeaderboardUI(props){
 }
 
 function UsersOfLeaderboard(props){
-    let CurrentUserName = props.CurrentUserName;
-    fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
+    let Rank = props.Rank;
+    fetch(`http://localhost:3214/Server/Leaderboard/${Rank}`)
     .then(response => response.json())
     .then(Data => {
         // Use the Data here
@@ -51,7 +51,6 @@ function UsersOfLeaderboard(props){
 }
 
 export default function Leaderboard(props){
-    let CurrentUserName = props.CurrentUserName;
     return(
         <div>
             <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks CurrentUserName={props.CurrentUserName} />, document.getElementById('Box'))}>Leaderboard</a>
