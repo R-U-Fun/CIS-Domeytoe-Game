@@ -124,6 +124,33 @@ app.put('/Server/GamesWon/:CurrentUserName', (req, res) => {
     });
 });
 
+app.put('/Server/UpdateRanks', (req, res) => {
+  // Fetch all users from the database
+  User.find()
+    .then(AllUsers => {
+      // Sort users based on BestTime in ascending order
+      const SortedUsers = AllUsers.sort((a, b) => {
+        if (a.BestTime === b.BestTime) {
+          // If BestTime is equal, sort by UserId
+          return a.UserId > b.UserId ? 1 : -1;
+        }
+        // Otherwise, sort by BestTime
+        return a.BestTime - b.BestTime;
+      });
+
+      // Update the Rank property for each user
+      for (let i = 0; i < SortedUsers.length; i++) {
+        const user = SortedUsers[i];
+        User.updateOne({ _id: user._id }, { Rank: i + 1 })
+          .then(() => console.log("User rank updated successfully"))
+          .catch(err => console.log("Error updating user rank: " + err));
+      }
+      console.log("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRrRanks updated successfully");
+    })
+    .catch(err => {
+      console.error(err);
+    });
+});
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

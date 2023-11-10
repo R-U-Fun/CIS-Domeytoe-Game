@@ -16,11 +16,13 @@ import Level from './Level';
 
 import UserProfile from './UserProfile';
 
+//function updateRanks(){}
+
 function LeaderboardUI(props){
     return(
         <tr>
             <th><a className="btn btn-danger m-1 fw-bold" style={{width:"40px", cursor: 'auto'}}><i className={`bi bi-${props.Rank}-square-fill`}></i></a></th>
-            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"200px", cursor: 'auto'}}>{props.Name}</a></td>
+            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"150px", cursor: 'auto'}}>{props.Name}</a></td>
             <td>
                 <a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}>
                     {props.BestTime}
@@ -51,37 +53,44 @@ function UsersOfLeaderboard(props){
 }
 
 export default function Leaderboard(props){
+    fetch('http://localhost:3214/Server/UpdateRanks', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .catch(error => console.error('Error:', error));
     return(
         <div>
             <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks CurrentUserName={props.CurrentUserName} />, document.getElementById('Box'))}>Leaderboard</a>
             <table className="text-start">
                 <tbody>
                     <tr id="tr1">
-                        <UsersOfLeaderboard CurrentUserName={props.CurrentUserName} Rank={1} />
+                        <UsersOfLeaderboard Rank={1} />
                     </tr>
                     <tr id="tr2">
-                        <UsersOfLeaderboard CurrentUserName={props.CurrentUserName} Rank={2} />
+                        <UsersOfLeaderboard Rank={2} />
                     </tr>
                     <tr id="tr3">
-                        <UsersOfLeaderboard CurrentUserName={props.CurrentUserName} Rank={3} />
+                        <UsersOfLeaderboard Rank={3} />
                     </tr> 
                     <tr id="tr4">
-                        <UsersOfLeaderboard CurrentUserName={props.CurrentUserName} Rank={4} />
+                        <UsersOfLeaderboard Rank={4} />
                     </tr> 
                     <tr id="tr5">
-                        <UsersOfLeaderboard CurrentUserName={props.CurrentUserName} Rank={5} />
+                        <UsersOfLeaderboard Rank={5} />
                     </tr> 
                     <tr id="tr6">
-                        <UsersOfLeaderboard CurrentUserName={props.CurrentUserName} Rank={6} />
+                        <UsersOfLeaderboard Rank={6} />
                     </tr> 
                     <tr id="tr7">
-                        <UsersOfLeaderboard CurrentUserName={props.CurrentUserName} Rank={7} />
+                        <UsersOfLeaderboard Rank={7} />
                     </tr> 
                     <tr id="tr8">
-                        <UsersOfLeaderboard CurrentUserName={props.CurrentUserName} Rank={8} />
+                        <UsersOfLeaderboard Rank={8} />
                     </tr> 
                     <tr id="tr9">
-                        <UsersOfLeaderboard CurrentUserName={props.CurrentUserName} Rank={9} />
+                        <UsersOfLeaderboard Rank={9} />
                     </tr> 
                 </tbody>
             </table>

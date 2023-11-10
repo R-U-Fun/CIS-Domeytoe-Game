@@ -41,9 +41,6 @@ function PlayerUI(props){
                     <Hearts Fill={props.H2}/>
                     <Hearts Fill={props.H3}/>
                 </p>
-                <br/>
-                <p className="fw-bold"><i className="bi bi-trophy-fill"></i> : {props.Rank}</p>
-                <p className="fw-bold"><i className="bi bi-fire"></i> : {props.DailyStreaks}</p>
             </a>
         </div>
     );
@@ -96,7 +93,7 @@ export default function Player(props){
         console.log("DATA GamesPlayed = "+Data.GamesPlayed);
         console.log("DATA GamesWon = "+Data.GamesWon);
 
-        ReactDOM.render(<PlayerUI CurrentUserName={props.CurrentUserName} Username={Data.Name} DailyStreaks={Data.DailyStreaks} Rank={Data.Rank} H1={H1} H2={H2} H3={H3} />, document.getElementById('PlayerHere'));
+        ReactDOM.render(<PlayerUI CurrentUserName={props.CurrentUserName} Username={Data.Name} H1={H1} H2={H2} H3={H3} />, document.getElementById('PlayerHere'));
 
     })
     .catch(error => console.error('Error:', error));
