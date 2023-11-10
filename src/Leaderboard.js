@@ -21,13 +21,10 @@ import UserProfile from './UserProfile';
 function LeaderboardUI(props){
     return(
         <tr>
-            <th><a className="btn btn-danger m-1 fw-bold" style={{width:"40px", cursor: 'auto'}}><i className={`bi bi-${props.Rank}-square-fill`}></i></a></th>
+            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"40px", cursor: 'auto'}}><i className={`bi bi-${props.Rank}-square-fill`}></i></a></td>
             <td><a className="btn btn-danger m-1 fw-bold" style={{width:"150px", cursor: 'auto'}}>{props.Name}</a></td>
-            <td>
-                <a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}>
-                    {props.BestTime}
-                </a>
-            </td>
+            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}>{props.BestTime}</a></td>
+            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}>{props.DailyStreaks}</a></td>
         </tr>
     );
 }
@@ -47,7 +44,7 @@ function UsersOfLeaderboard(props){
         console.log("DATA GamesPlayed = "+Data.GamesPlayed);
         console.log("DATA GamesWon = "+Data.GamesWon);
 
-        ReactDOM.render(<LeaderboardUI Rank={props.Rank} Name={Data.Name} BestTime={Data.BestTime} />, document.getElementById('tr'+props.Rank));
+        ReactDOM.render(<LeaderboardUI Rank={props.Rank} Name={Data.Name} BestTime={Data.BestTime} DailyStreaks={Data.DailyStreaks} GamesWon={Data.GamesWon} GamesPlayed={Data.GamesPlayed} />, document.getElementById('tr'+props.Rank));
     })
     .catch(error => console.error('Error:', error));
 }
@@ -65,6 +62,14 @@ export default function Leaderboard(props){
             <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks CurrentUserName={props.CurrentUserName} />, document.getElementById('Box'))}>Leaderboard</a>
             <table className="text-start">
                 <tbody>
+                    <tr>
+                        <tr>
+                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"40px", cursor: 'auto'}}><i class="bi bi-trophy-fill"></i></a></th>
+                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"150px", cursor: 'auto'}}><i class="bi bi-person-fill"></i></a></th>
+                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}><i class="bi bi-hourglass-split"></i></a></th>
+                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}><i class="bi bi-fire"></i></a></th>
+                        </tr>
+                    </tr>
                     <tr id="tr1">
                         <UsersOfLeaderboard Rank={1} />
                     </tr>
@@ -91,6 +96,9 @@ export default function Leaderboard(props){
                     </tr> 
                     <tr id="tr9">
                         <UsersOfLeaderboard Rank={9} />
+                    </tr> 
+                    <tr id="tr10">
+                        <UsersOfLeaderboard Rank={10} />
                     </tr> 
                 </tbody>
             </table>
