@@ -16,8 +16,6 @@ import Level from './Level';
 
 import UserProfile from './UserProfile';
 
-//function updateRanks(){}
-
 function LeaderboardUI(props){
     return(
         <tr>
@@ -64,10 +62,10 @@ export default function Leaderboard(props){
                 <tbody>
                     <tr>
                         <tr>
-                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"40px", cursor: 'auto'}}><i class="bi bi-trophy-fill"></i></a></th>
-                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"150px", cursor: 'auto'}}><i class="bi bi-person-fill"></i></a></th>
-                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}><i class="bi bi-hourglass-split"></i></a></th>
-                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}><i class="bi bi-fire"></i></a></th>
+                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"40px", cursor: 'auto'}}><i className="bi bi-trophy-fill"></i></a></th>
+                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"150px", cursor: 'auto'}}><i className="bi bi-person-fill"></i></a></th>
+                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}><i className="bi bi-hourglass-split"></i></a></th>
+                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}><i className="bi bi-fire"></i></a></th>
                         </tr>
                     </tr>
                     <tr id="tr1">

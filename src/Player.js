@@ -85,23 +85,11 @@ export default function Player(props){
     }
 
     let CurrentUserName = CurrentUserNameSingleton.getUserName();
-    console.log("PPPPPPLLLLLAAAAYYYYEEEERRRR     "+CurrentUserName);
 
     fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
     .then(response => response.json())
     .then(Data => {
-        // Use the Data here
-        console.log("DATA Users= "+Data.UserID);
-        console.log("DATA Name = "+Data.Name);
-        console.log("DATA Password = "+Data.Password);
-        console.log("DATA DailyStreaks = "+Data.DailyStreaks);
-        console.log("DATA Rank = "+Data.Rank);
-        console.log("DATA BestTime = "+Data.BestTime);
-        console.log("DATA GamesPlayed = "+Data.GamesPlayed);
-        console.log("DATA GamesWon = "+Data.GamesWon);
-
         ReactDOM.render(<PlayerUI Hearts={Hearts} />, document.getElementById('PlayerHere'));
-
     })
     .catch(error => console.error('Error:', error));
     

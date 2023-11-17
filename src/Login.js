@@ -29,16 +29,6 @@ function LoginHandle(props){
         .then(response => response.json())
         .then(Data => {
             if(Data && CurrentPassword === Data.Password){
-                // Use the Data here
-                console.log("DATA Users= "+Data.UserID);
-                console.log("DATA Name = "+Data.Name);
-                console.log("DATA Password = "+Data.Password);
-                console.log("DATA DailyStreaks = "+Data.DailyStreaks);
-                console.log("DATA Rank = "+Data.Rank);
-                console.log("DATA BestTime = "+Data.BestTime);
-                console.log("DATA GamesPlayed = "+Data.GamesPlayed);
-                console.log("DATA GamesWon = "+Data.GamesWon);
-
                 CurrentUserNameSingleton.setUserName(CurrentUserName);
                 console.log("LOGGGGGGGIIIIIIIIINNNNNNNNNN     "+CurrentUserNameSingleton.getUserName());
                 ReactDOM.render(<HomeLinks />, document.getElementById('Box'));
