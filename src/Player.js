@@ -16,6 +16,8 @@ import Level from './Level';
 import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
 
+import CurrentUserNameSingleton from './UserSingleton';
+
 function Hearts(HeartsProps){
     if(HeartsProps.Fill==true){
         return(
@@ -30,16 +32,17 @@ function Hearts(HeartsProps){
 }
 
 function PlayerUI(props){
+    let CurrentUserName = CurrentUserNameSingleton.getUserName();
     return(
         <div className="container-fluids">
-            <a className="btn btn-danger btn-lg m-3"  onClick={() => ReactDOM.render(<UserProfile CurrentUserName={props.CurrentUserName} />, document.getElementById('Box'))}>
+            <a className="btn btn-danger btn-lg m-3" onClick={() => ReactDOM.render(<UserProfile />, document.getElementById('Box'))}>
                 &nbsp;&nbsp;&nbsp;
                 <p className="fw-bold"><i className="bi bi-person-fill"></i></p>
-                <p className="fw-bold">{props.Username}</p>
+                <p className="fw-bold">{CurrentUserName}</p>
                 <p className="fw-bold">
-                    <Hearts Fill={props.H1}/>
-                    <Hearts Fill={props.H2}/>
-                    <Hearts Fill={props.H3}/>
+                    <Hearts Fill={props.Hearts.H1}/>
+                    <Hearts Fill={props.Hearts.H2}/>
+                    <Hearts Fill={props.Hearts.H3}/>
                 </p>
             </a>
         </div>
@@ -49,37 +52,41 @@ function PlayerUI(props){
         
 export default function Player(props){
 
-    let H1 = true;
-    let H2 = true;
-    let H3 = true;
+    const Hearts = {
+        H1 : true,
+        H2 : true,
+        H3 : true
+    }
     let HowManyHearts = parseInt(props.HowManyHearts);
     if(HowManyHearts === 3){
-        H1 = true;
-        H2 = true;
-        H3 = true;
+        Hearts.H1 = true;
+        Hearts.H2 = true;
+        Hearts.H3 = true;
     }
     else if(HowManyHearts === 2){
-        H1 = true;
-        H2 = true;
-        H3 = false;
+        Hearts.H1 = true;
+        Hearts.H2 = true;
+        Hearts.H3 = false;
     }
     else if(HowManyHearts === 1){
-        H1 = true;
-        H2 = false;
-        H3 = false;
+        Hearts.H1 = true;
+        Hearts.H2 = false;
+        Hearts.H3 = false;
     }
     else if(HowManyHearts === 0){
-        H1 = false;
-        H2 = false;
-        H3 = false;
+        Hearts.H1 = false;
+        Hearts.H2 = false;
+        Hearts.H3 = false;
     }
     else{
-        H1 = true;
-        H2 = true;
-        H3 = true;
+        Hearts.H1 = true;
+        Hearts.H2 = true;
+        Hearts.H3 = true;
     }
 
-    let CurrentUserName=props.CurrentUserName;
+    let CurrentUserName = CurrentUserNameSingleton.getUserName();
+    console.log("PPPPPPLLLLLAAAAYYYYEEEERRRR     "+CurrentUserName);
+
     fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
     .then(response => response.json())
     .then(Data => {
@@ -93,7 +100,7 @@ export default function Player(props){
         console.log("DATA GamesPlayed = "+Data.GamesPlayed);
         console.log("DATA GamesWon = "+Data.GamesWon);
 
-        ReactDOM.render(<PlayerUI CurrentUserName={props.CurrentUserName} Username={Data.Name} H1={H1} H2={H2} H3={H3} />, document.getElementById('PlayerHere'));
+        ReactDOM.render(<PlayerUI Hearts={Hearts} />, document.getElementById('PlayerHere'));
 
     })
     .catch(error => console.error('Error:', error));

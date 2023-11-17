@@ -17,9 +17,11 @@ import Level from './Level';
 import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
 
+import CurrentUserNameSingleton from './UserSingleton';
+
 export default function BestTime(props){
     let TimeElapsed = parseInt(props.TimeElapsed);
-    let CurrentUserName = props.CurrentUserName;
+    let CurrentUserName = CurrentUserNameSingleton.getUserName();
 
     fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
         .then(response => response.json())

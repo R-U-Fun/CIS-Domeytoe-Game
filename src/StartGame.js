@@ -19,8 +19,10 @@ import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
 import BestTime from './BestTime';
 
-function UpdateGamesWon(CurrentUserName){
+import CurrentUserNameSingleton from './UserSingleton';
 
+function UpdateGamesWon(){
+    let CurrentUserName = CurrentUserNameSingleton.getUserName();
     fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
         .then(response => response.json())
         .then(Data => {
@@ -48,8 +50,8 @@ function UpdateGamesWon(CurrentUserName){
         .catch(error => console.error('Error:', error));
 }
 
-function UpdateGamesPlayed(CurrentUserName){
-
+function UpdateGamesPlayed(){
+    let CurrentUserName = CurrentUserNameSingleton.getUserName();
     fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
         .then(response => response.json())
         .then(Data => {
@@ -81,19 +83,19 @@ export function GameOver(props){
     return(
         <div>
             <i class="bi bi-heartbreak-fill btn btn-danger btn-lg m-4 fs-2 fw-bold" style={{cursor: 'auto'}}></i><br/>
-            <button class="bi bi-arrow-clockwise btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<StartGame CurrentUserName={props.CurrentUserName} Level={props.Level} />, document.getElementById('Box'))}></button>
+            <button class="bi bi-arrow-clockwise btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<StartGame Level={props.Level} />, document.getElementById('Box'))}></button>
         </div>
     );
 }
 
 function GameWon(props){
-    let CurrentUserName = props.CurrentUserName;
+    let CurrentUserName = CurrentUserNameSingleton.getUserName();
     UpdateGamesWon(CurrentUserName);
     return(
         <div>
             <a className="btn btn-danger btn-lg m-4 fw-bold" style={{cursor: 'auto'}}>Correct</a>
             <i class="bi bi-hand-thumbs-up-fill btn btn-danger btn-lg m-4" style={{cursor: 'auto'}}></i><br/>
-            <button class="bi bi-arrow-clockwise btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<StartGame CurrentUserName={props.CurrentUserName} Level={props.Level} />, document.getElementById('Box'))}></button>
+            <button class="bi bi-arrow-clockwise btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<StartGame Level={props.Level} />, document.getElementById('Box'))}></button>
         </div>
     );
 }
@@ -103,17 +105,17 @@ function CorrectOrNot(props){
     console.log("CorrectorNot - User = "+props.Answer);
     if(props.Answer === props.Correct){
         props.stopTimer();
-        ReactDOM.render(<GameWon CurrentUserName={props.CurrentUserName} Level={props.Level} />, document.getElementById('InputAnswer'));
+        ReactDOM.render(<GameWon Level={props.Level} />, document.getElementById('InputAnswer'));
     }
     else{
         props.setHowManyHearts(props.HowManyHearts - 1);
         if(parseInt(props.HowManyHearts) === 1){
             props.stopTimer();
-            ReactDOM.render(<Player CurrentUserName={props.CurrentUserName} HowManyHearts={(props.HowManyHearts)-1}/>, document.getElementById('PlayerHere'));
-            ReactDOM.render(<GameOver CurrentUserName={props.CurrentUserName} Level={props.Level} />, document.getElementById('InputAnswer'));
+            ReactDOM.render(<Player HowManyHearts={(props.HowManyHearts)-1}/>, document.getElementById('PlayerHere'));
+            ReactDOM.render(<GameOver Level={props.Level} />, document.getElementById('InputAnswer'));
         }
         else{
-            ReactDOM.render(<Player CurrentUserName={props.CurrentUserName} HowManyHearts={(props.HowManyHearts)-1}/>, document.getElementById('PlayerHere'));
+            ReactDOM.render(<Player HowManyHearts={(props.HowManyHearts)-1}/>, document.getElementById('PlayerHere'));
             return(
                 <div>
                     <a className="btn btn-danger btn-lg m-4 fw-bold" style={{cursor: 'auto'}}>Incorrect</a>
@@ -130,14 +132,14 @@ function Game(props){
     return(
         <div className="card text-white" style={{ background: 'rgba(0, 0, 0, 0)', border: 'none',display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} 
-                onClick={() => ReactDOM.render(<HomeLinks CurrentUserName={props.CurrentUserName} />, document.getElementById('Box'))}>Game</a>
-            <img src={props.question} className="card-img-top" alt="..." style={{objectFit: 'cover'}}/>
+                onClick={() => ReactDOM.render(<HomeLinks />, document.getElementById('Box'))}>Game</a>
+            <img src={props.Tomato.question} className="card-img-top" alt="..." style={{objectFit: 'cover'}}/>
             <div id="InputAnswer" className="card-body" style={{ background: 'rgba(0, 0, 0, 0)', border: 'none' }}>
                 <div className="input-group mb-3">
                     <span className="input-group-text bi bi-123 btn btn-danger" id="AnswerText" style={{cursor: 'auto'}}></span>
                     <input type="text" className="form-control" placeholder="Answer" aria-label="Answer" aria-describedby="AnswerText" ref={inputRef}/>
                     &nbsp;&nbsp;&nbsp;
-                    <button type="button" className="bi bi-arrow-return-right btn btn-danger fw-bold" onClick={() => ReactDOM.render(<CorrectOrNot CurrentUserName={props.CurrentUserName}  Correct={parseInt(props.solution)} Answer={parseInt(inputRef.current.value)} HowManyHearts={HowManyHearts} setHowManyHearts={setHowManyHearts} stopTimer={props.stopTimer} Level={props.Level} />, document.getElementById('CoN'))}></button>
+                    <button type="button" className="bi bi-arrow-return-right btn btn-danger fw-bold" onClick={() => ReactDOM.render(<CorrectOrNot Correct={parseInt(props.Tomato.solution)} Answer={parseInt(inputRef.current.value)} HowManyHearts={HowManyHearts} setHowManyHearts={setHowManyHearts} stopTimer={props.stopTimer} Level={props.Level} />, document.getElementById('CoN'))}></button>
                 </div>
                 <div id="CoN"></div>
                 <div id="Best"></div>
@@ -148,7 +150,7 @@ function Game(props){
         
 export default function StartGame(props){
 
-    let CurrentUserName = props.CurrentUserName;
+    let CurrentUserName = CurrentUserNameSingleton.getUserName();
 
     UpdateGamesPlayed(CurrentUserName);
 
@@ -184,21 +186,21 @@ export default function StartGame(props){
             
         } else {
             clearInterval(OneSecPass);
-            ReactDOM.render(<GameOver CurrentUserName={props.CurrentUserName} Level={props.Level}/>, document.getElementById('InputAnswer'));
+            ReactDOM.render(<GameOver Level={props.Level}/>, document.getElementById('InputAnswer'));
         }
     }, 1000);
 
     const stopTimer = () => {
         clearInterval(OneSecPass);
-        ReactDOM.render(<BestTime CurrentUserName={props.CurrentUserName} TimeElapsed={TimeElapsed} />, document.getElementById('CoN'));
+        ReactDOM.render(<BestTime TimeElapsed={TimeElapsed} />, document.getElementById('CoN'));
     };
     
     fetch('https://marcconrad.com/uob/tomato/api.php')
         .then(response => response.json())
-        .then(data => {
-            console.log("TOMATO API - Question = "+data.question);
-            console.log("TOMATO API - Solution = "+data.solution);
-            ReactDOM.render(<Game CurrentUserName={props.CurrentUserName} question={data.question} solution= {data.solution} HowManyHearts={3} Level={props.Level} stopTimer={stopTimer} />, document.getElementById('Box'));
+        .then(Tomato => {
+            console.log("TOMATO API - Question = "+Tomato.question);
+            console.log("TOMATO API - Solution = "+Tomato.solution);
+            ReactDOM.render(<Game Tomato={Tomato} HowManyHearts={3} Level={props.Level} stopTimer={stopTimer} />, document.getElementById('Box'));
         })
         .catch(error => console.error('Error:', error));
     return null;

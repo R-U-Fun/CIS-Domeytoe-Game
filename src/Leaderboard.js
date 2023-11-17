@@ -21,10 +21,10 @@ import UserProfile from './UserProfile';
 function LeaderboardUI(props){
     return(
         <tr>
-            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"40px", cursor: 'auto'}}><i className={`bi bi-${props.Rank}-square-fill`}></i></a></td>
-            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"150px", cursor: 'auto'}}>{props.Name}</a></td>
-            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}>{props.BestTime}</a></td>
-            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}>{props.DailyStreaks}</a></td>
+            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"40px", cursor: 'auto'}}><i className={`bi bi-${props.Data.Rank}-square-fill`}></i></a></td>
+            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"150px", cursor: 'auto'}}>{props.Data.Name}</a></td>
+            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}>{props.Data.BestTime}</a></td>
+            <td><a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}>{props.Data.DailyStreaks}</a></td>
         </tr>
     );
 }
@@ -44,7 +44,7 @@ function UsersOfLeaderboard(props){
         console.log("DATA GamesPlayed = "+Data.GamesPlayed);
         console.log("DATA GamesWon = "+Data.GamesWon);
 
-        ReactDOM.render(<LeaderboardUI Rank={props.Rank} Name={Data.Name} BestTime={Data.BestTime} DailyStreaks={Data.DailyStreaks} GamesWon={Data.GamesWon} GamesPlayed={Data.GamesPlayed} />, document.getElementById('tr'+props.Rank));
+        ReactDOM.render(<LeaderboardUI Data={Data} />, document.getElementById('tr'+props.Rank));
     })
     .catch(error => console.error('Error:', error));
 }
@@ -59,7 +59,7 @@ export default function Leaderboard(props){
     .catch(error => console.error('Error:', error));
     return(
         <div>
-            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks CurrentUserName={props.CurrentUserName} />, document.getElementById('Box'))}>Leaderboard</a>
+            <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks />, document.getElementById('Box'))}>Leaderboard</a>
             <table className="text-start">
                 <tbody>
                     <tr>

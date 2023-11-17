@@ -19,6 +19,8 @@ import Level from './Level';
 import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
 
+import CurrentUserNameSingleton from './UserSingleton';
+
 function LoginHandle(props){
     let CurrentUserName = props.CurrentUserName;
     let CurrentPassword = props.CurrentPassword;
@@ -37,8 +39,9 @@ function LoginHandle(props){
                 console.log("DATA GamesPlayed = "+Data.GamesPlayed);
                 console.log("DATA GamesWon = "+Data.GamesWon);
 
-                console.log("LOGGGGGGGIIIIIIIIINNNNNNNNNN");
-                ReactDOM.render(<HomeLinks CurrentUserName={props.CurrentUserName} />, document.getElementById('Box'));
+                CurrentUserNameSingleton.setUserName(CurrentUserName);
+                console.log("LOGGGGGGGIIIIIIIIINNNNNNNNNN     "+CurrentUserNameSingleton.getUserName());
+                ReactDOM.render(<HomeLinks />, document.getElementById('Box'));
             }
             else{
                 ReactDOM.render(<Login />, document.getElementById('Box'));
