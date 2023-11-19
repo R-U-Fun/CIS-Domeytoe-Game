@@ -21,37 +21,40 @@ import CurrentUserNameSingleton from './UserSingleton';
 
 export default function BestTime(props){
     let TimeElapsed = parseInt(props.TimeElapsed);
-    let CurrentUserName = CurrentUserNameSingleton.getUserName();
 
-    fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
-        .then(response => response.json())
-        .then(Data => {
-            if(TimeElapsed < Data.BestTime || Data.BestTime === null){
-                
-                fetch(`http://localhost:3214/Server/BestTime/${CurrentUserName}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        BestTime: TimeElapsed,
-                    }),
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-                
-                fetch('http://localhost:3214/Server/UpdateRanks', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                })
-                .catch(error => console.error('Error:', error));
+    let UserData = CurrentUserNameSingleton.getUserName();
 
-                alert("New Best Time = "+ TimeElapsed +" Sec");
-            }
+    if(TimeElapsed < UserData.BestTime || UserData.BestTime === null){
+
+        fetch(`http://localhost:3214/Server/BestTime/${UserData.Name}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                BestTime: TimeElapsed,
+            }),
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+                    
+        fetch('http://localhost:3214/Server/UpdateRanks', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         })
         .catch(error => console.error('Error:', error));
-    return(null);
+        
+        alert("New Best Time = "+ TimeElapsed +" Sec");
+
+        fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
+        .then(response => response.json())
+        .then(Data => {
+            CurrentUserNameSingleton.setUserName(Data);
+            console.log("NNNNNNNEEEEEEEEWWWWWWWW BBBBEEEESSSSTTTTTT     "+CurrentUserNameSingleton.getUserName().BestTime);
+        })
+        .catch(error => console.error('Error:', error));
+    }
 }

@@ -29,8 +29,7 @@ function LoginHandle(props){
         .then(response => response.json())
         .then(Data => {
             if(Data && CurrentPassword === Data.Password){
-                CurrentUserNameSingleton.setUserName(CurrentUserName);
-                console.log("LOGGGGGGGIIIIIIIIINNNNNNNNNN     "+CurrentUserNameSingleton.getUserName());
+                CurrentUserNameSingleton.setUserName(Data);
                 ReactDOM.render(<HomeLinks />, document.getElementById('Box'));
             }
             else{

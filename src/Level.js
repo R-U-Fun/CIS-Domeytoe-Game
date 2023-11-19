@@ -18,7 +18,7 @@ import UserProfile from './UserProfile';
 
 import CurrentLevelSingleton from './LevelSingleton';
 
-export default function Level(props){
+export default function Level(){
     return(
         <div>
             <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks />, document.getElementById('Box'))}>Levels</a>

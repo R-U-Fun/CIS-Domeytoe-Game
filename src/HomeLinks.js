@@ -19,9 +19,9 @@ import UserProfile from './UserProfile';
 import CurrentUserNameSingleton from './UserSingleton';
 
 function LogOut(){
-    ReactDOM.render(<Login />, document.getElementById('Box'));
     ReactDOM.render(<div></div>, document.getElementById('PlayerHere')); 
     ReactDOM.render(<div></div>, document.getElementById('TimerHere'));
+    ReactDOM.render(<Login />, document.getElementById('Box'));
 }
 
 export default function HomeLinks(props){

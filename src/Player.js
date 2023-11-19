@@ -18,38 +18,6 @@ import UserProfile from './UserProfile';
 
 import CurrentUserNameSingleton from './UserSingleton';
 
-function Hearts(HeartsProps){
-    if(HeartsProps.Fill==true){
-        return(
-            <i className="bi bi-suit-heart-fill"> </i>
-        );
-    }
-    else{
-        return(
-            <i className="bi bi-suit-heart"> </i>
-        );
-    }
-}
-
-function PlayerUI(props){
-    let CurrentUserName = CurrentUserNameSingleton.getUserName();
-    return(
-        <div className="container-fluids">
-            <a className="btn btn-danger btn-lg m-3" onClick={() => ReactDOM.render(<UserProfile />, document.getElementById('Box'))}>
-                &nbsp;&nbsp;&nbsp;
-                <p className="fw-bold"><i className="bi bi-person-fill"></i></p>
-                <p className="fw-bold">{CurrentUserName}</p>
-                <p className="fw-bold">
-                    <Hearts Fill={props.Hearts.H1}/>
-                    <Hearts Fill={props.Hearts.H2}/>
-                    <Hearts Fill={props.Hearts.H3}/>
-                </p>
-            </a>
-        </div>
-    );
-}
-
-        
 export default function Player(props){
 
     const Hearts = {
@@ -84,13 +52,21 @@ export default function Player(props){
         Hearts.H3 = true;
     }
 
-    let CurrentUserName = CurrentUserNameSingleton.getUserName();
+    let UserData = CurrentUserNameSingleton.getUserName();
 
-    fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
-    .then(response => response.json())
-    .then(Data => {
-        ReactDOM.render(<PlayerUI Hearts={Hearts} />, document.getElementById('PlayerHere'));
-    })
-    .catch(error => console.error('Error:', error));
+    return(
+        <div className="container-fluids">
+            <a className="btn btn-danger btn-lg m-3" onClick={() => ReactDOM.render(<UserProfile />, document.getElementById('Box'))}>
+                &nbsp;&nbsp;&nbsp;
+                <p className="fw-bold"><i className="bi bi-person-fill"></i></p>
+                <p className="fw-bold">{UserData.Name}</p>
+                <p className="fw-bold">
+                    {Hearts.H1 ? <i className="bi bi-suit-heart-fill"> </i> : <i className="bi bi-suit-heart"> </i>}
+                    {Hearts.H2 ? <i className="bi bi-suit-heart-fill"> </i> : <i className="bi bi-suit-heart"> </i>}
+                    {Hearts.H3 ? <i className="bi bi-suit-heart-fill"> </i> : <i className="bi bi-suit-heart"> </i>}
+                </p>
+            </a>
+        </div>
+    );
     
 }

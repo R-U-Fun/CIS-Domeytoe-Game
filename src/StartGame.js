@@ -23,64 +23,68 @@ import CurrentUserNameSingleton from './UserSingleton';
 import CurrentLevelSingleton from './LevelSingleton';
 
 function UpdateGamesWon(){
-    let CurrentUserName = CurrentUserNameSingleton.getUserName();
-    fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
-        .then(response => response.json())
-        .then(Data => {
-            let GamesWon = Data.GamesWon;
-            if(GamesWon === null){
-                GamesWon=1;
-            }
-            else{
-                GamesWon = GamesWon + 1;
-            }
-            fetch(`http://localhost:3214/Server/GamesWon/${CurrentUserName}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        GamesWon: GamesWon,
-                    }),
-                })
-                .catch((error) => {
-                    console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
-                });
-                
-        })
-        .catch(error => console.error('Error:', error));
+    let UserData = CurrentUserNameSingleton.getUserName();
+    let GamesWon = UserData.GamesWon;
+    if(GamesWon === null){
+        GamesWon=1;
+    }
+    else{
+        GamesWon = GamesWon + 1;
+    }
+    fetch(`http://localhost:3214/Server/GamesWon/${UserData.Name}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            GamesWon: GamesWon,
+        }),
+    })
+    .catch((error) => {
+        console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
+    });
+
+    fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
+    .then(response => response.json())
+    .then(Data => {
+        CurrentUserNameSingleton.setUserName(Data);
+        console.log("GGGGGGGGGAAAAAMEEEEEEESSSS WWWWWWWOOOOOOONNNNNNNN     "+CurrentUserNameSingleton.getUserName().GamesWon);
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 function UpdateGamesPlayed(){
-    let CurrentUserName = CurrentUserNameSingleton.getUserName();
-    fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
-        .then(response => response.json())
-        .then(Data => {
-            let GamesPlayed = Data.GamesPlayed;
-            if(GamesPlayed === null){
-                GamesPlayed=1;
-            }
-            else{
-                GamesPlayed = GamesPlayed + 1;
-            }
-            fetch(`http://localhost:3214/Server/GamesPlayed/${CurrentUserName}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        GamesPlayed: GamesPlayed,
-                    }),
-                })
-                .catch((error) => {
-                    console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
-                });
-                
-        })
-        .catch(error => console.error('Error:', error));
+    let UserData = CurrentUserNameSingleton.getUserName();
+    let GamesPlayed = UserData.GamesPlayed;
+    if(GamesPlayed === null){
+        GamesPlayed=1;
+    }
+    else{
+        GamesPlayed = GamesPlayed + 1;
+    }
+    fetch(`http://localhost:3214/Server/GamesPlayed/${UserData.Name}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            GamesPlayed: GamesPlayed,
+        }),
+    })
+    .catch((error) => {
+        console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
+    });
+
+    fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
+    .then(response => response.json())
+    .then(Data => {
+        CurrentUserNameSingleton.setUserName(Data);
+        console.log("GGGGGGGGGAAAAAMEEEEEEESSSS PPPPLLLAAAAYYYYEEEEDDDDD     "+CurrentUserNameSingleton.getUserName().GamesPlayed);
+    })
+    .catch(error => console.error('Error:', error));
 }
 
-export function GameOver(props){
+export function GameOver(){
     return(
         <div>
             <i className="bi bi-heartbreak-fill btn btn-danger btn-lg m-4 fs-2 fw-bold" style={{cursor: 'auto'}}></i><br/>
@@ -89,9 +93,8 @@ export function GameOver(props){
     );
 }
 
-function GameWon(props){
-    let CurrentUserName = CurrentUserNameSingleton.getUserName();
-    UpdateGamesWon(CurrentUserName);
+function GameWon(){
+    UpdateGamesWon();
     return(
         <div>
             <a className="btn btn-danger btn-lg m-4 fw-bold" style={{cursor: 'auto'}}>Correct</a>

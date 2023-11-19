@@ -1,20 +1,20 @@
 class LevelSingleton {
-  constructor() {
-    if (!LevelSingleton.instance) {
-      this.CurrentLevel = null;
-      LevelSingleton.instance = this;
-    }
+	constructor() {
+		if (!LevelSingleton.instance) {
+			this.CurrentLevel = null;
+			LevelSingleton.instance = this;
+		}
 
-    return LevelSingleton.instance;
-  }
+		return LevelSingleton.instance;
+	}
 
-  setLevel(CurrentLevel) {
-    this.CurrentLevel = CurrentLevel;
-  }
+	setLevel(CurrentLevel) {
+		this.CurrentLevel = CurrentLevel;
+	}
 
-  getLevel() {
-    return this.CurrentLevel;
-  }
+	getLevel() {
+		return this.CurrentLevel;
+	}
 }
 
 const CurrentLevelSingleton = new LevelSingleton();
