@@ -5,7 +5,6 @@ const port = 3214;
 const mongoose = require('mongoose');
 
 app.use(cors());
-app.use(cors({ origin: 'http://localhost:3000' }));
 
 app.use(express.json());
 

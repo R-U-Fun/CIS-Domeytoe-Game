@@ -30,10 +30,6 @@ export default function UserProfile(){
             <table className="text-start">
                 <tbody>
                     <tr>
-                        <th><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>User ID</a></th>
-                        <td><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>{UserData.UserID}</a></td>
-                    </tr>
-                    <tr>
                         <th><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>Username</a></th>
                         <td><a className="btn btn-danger m-2 fw-bold" style={{width:"150px", cursor: 'auto'}}>{UserData.Name}</a></td>
                     </tr>

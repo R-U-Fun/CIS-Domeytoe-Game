@@ -25,38 +25,50 @@ function RegisterHandle(props){
     let NewConfirmPassword = props.NewConfirmPassword;
 
     if( NewUserName && NewPassword && NewConfirmPassword){
-        if(NewPassword === NewConfirmPassword){
-            fetch('http://localhost:3214/Server/Register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    userID: null,
-                    username: NewUserName,
-                    password: NewPassword,
-                    dailyStreaks: 0,
-                    rank: 0,
-                    bestTime: 60,
-                    gamesPlayed: 0,
-                    gamesWon: 0
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("REGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGg");
-                console.log(data);
-                ReactDOM.render(<Login />, document.getElementById('Box'));
-            })
-            .catch(error => {
-                console.error(error);
-                console.log("Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror registering new user     "+error);
-            });
-        }
-        else{
-            ReactDOM.render(<Register />, document.getElementById('Box'));
-            alert("Password & Confirm Password doesn't match");
-        }
+        fetch(`http://localhost:3214/Server/UserProfile/${NewUserName}`)
+        .then(response => response.json())
+        .then(Data => {
+            if(!Data){
+                if(NewPassword === NewConfirmPassword){
+                    fetch('http://localhost:3214/Server/Register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            userID: null,
+                            username: NewUserName,
+                            password: NewPassword,
+                            dailyStreaks: 0,
+                            rank: 0,
+                            bestTime: 60,
+                            gamesPlayed: 0,
+                            gamesWon: 0
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("REGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGg");
+                        console.log(data);
+                        ReactDOM.render(<Login />, document.getElementById('Box'));
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        console.log("Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror registering new user     "+error);
+                    });
+                }
+                else{
+                    ReactDOM.render(<Register />, document.getElementById('Box'));
+                    alert("Password & Confirm Password doesn't match");
+                }
+            }
+            else{
+                ReactDOM.render(<Register />, document.getElementById('Box'));
+                alert("Username Already Exists");
+            }
+        
+        })
+        .catch(error => console.error('Error:', error));
     }
     else{
         ReactDOM.render(<Register />, document.getElementById('Box'));
