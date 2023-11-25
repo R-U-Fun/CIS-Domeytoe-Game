@@ -19,8 +19,7 @@ import UserProfile from './UserProfile';
 
 import CurrentUserNameSingleton from './UserSingleton';
 
-export default function BestTime(props){
-    let TimeElapsed = parseInt(props.TimeElapsed);
+export default function BestTime(TimeElapsed){
 
     let UserData = CurrentUserNameSingleton.getUserName();
 

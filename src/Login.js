@@ -21,9 +21,7 @@ import UserProfile from './UserProfile';
 
 import CurrentUserNameSingleton from './UserSingleton';
 
-function LoginHandle(props){
-    let CurrentUserName = props.CurrentUserName;
-    let CurrentPassword = props.CurrentPassword;
+function LoginHandle(CurrentUserName, CurrentPassword){
     if(CurrentUserName && CurrentPassword){
         fetch(`http://localhost:3214/Server/UserProfile/${CurrentUserName}`)
         .then(response => response.json())
@@ -33,14 +31,15 @@ function LoginHandle(props){
                 ReactDOM.render(<HomeLinks />, document.getElementById('Box'));
             }
             else{
-                ReactDOM.render(<Login />, document.getElementById('Box'));
                 alert("Invalid Username & Password");
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Can Not Connect At The Moment: Server Update On Progress.");
+        });
     }
     else{
-        ReactDOM.render(<Login />, document.getElementById('Box'));
         alert("Please fill Username & Password");
     }
 }
@@ -61,7 +60,7 @@ export default function Login(){
                 <input type="password" className="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" ref={passwordRef}/>
             </div>
             <button type="button" className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<Register />, document.getElementById('Box'))}><i className="bi bi-pen"></i> Register</button>
-            <button type="button" className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<LoginHandle CurrentUserName={usernameRef.current.value} CurrentPassword={passwordRef.current.value} />, document.getElementById('Box'))}><i className="bi bi-door-closed"></i> Login</button>
+            <button type="button" className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => LoginHandle(usernameRef.current.value, passwordRef.current.value)}><i className="bi bi-door-closed"></i> Login</button>
             <br/><br/><br/><br/><br/>
         </div>
     );

@@ -16,14 +16,15 @@ mongoose.connect('mongodb+srv://Aaroophan:AaroophanMongoDB@cluster0.9y1xdpc.mong
 
 app.post('/Server/Register', (req, res) => {
     let newUser = new User({
-        UserID: req.body.userID,
-        Name: req.body.username,
-        Password: req.body.password,
-        DailyStreaks: req.body.dailyStreaks,
-        Rank: req.body.rank,
-        BestTime: req.body.bestTime,
-        GamesPlayed: req.body.gamesPlayed,
-        GamesWon: req.body.gamesWon
+        UserID: req.body.UserID,
+        Name: req.body.Name,
+        Password: req.body.Password,
+        ChallengeDate: req.body.ChallengeDate,
+        DailyStreaks: req.body.DailyStreaks,
+        Rank: req.body.Rank,
+        BestTime: req.body.BestTime,
+        GamesPlayed: req.body.GamesPlayed,
+        GamesWon: req.body.GamesWon
     });
 
     newUser.save()
@@ -42,6 +43,7 @@ let User = mongoose.model('User', new mongoose.Schema({
         UserID: Number,
         Name: String,
         Password: String,
+        ChallengeDate: String,
         DailyStreaks: Number,
         Rank: Number,
         BestTime: Number,
@@ -64,6 +66,17 @@ app.get('/Server/UserProfile/:CurrentUserName', (req, res) => {
         }
     })
     .catch(err => {
+        let Dummy = {
+                UserID: "000000",
+                Name: "DUMMY",
+                Password: "DUMMY",
+                DailyStreaks: 0,
+                Rank: 0,
+                BestTime: 60,
+                GamesPlayed: 0,
+                GamesWon: 0
+        };
+        res.json(Dummy);
         console.log(err);
     });
 });
@@ -123,21 +136,40 @@ app.put('/Server/GamesWon/:CurrentUserName', (req, res) => {
     });
 });
 
+app.put('/Server/DailyStreaks/:CurrentUserName', (req, res) => {
+    let CurrentUserName = req.params.CurrentUserName;
+    let newDailyStreaks = req.body.DailyStreaks;
+    User.findOneAndUpdate({ "Name": CurrentUserName }, { DailyStreaks: newDailyStreaks }, { new: true })
+    .then(user => {
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Daily Streaks UPDATED");
+    })
+    .catch(err => {
+        console.log(err);
+    });
+});
+
+app.put('/Server/ChallengeDate/:CurrentUserName', (req, res) => {
+    let CurrentUserName = req.params.CurrentUserName;
+    let newChallengeDate = req.body.ChallengeDate;
+    User.findOneAndUpdate({ "Name": CurrentUserName }, { ChallengeDate: newChallengeDate }, { new: true })
+    .then(user => {
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Challenge Date UPDATED");
+    })
+    .catch(err => {
+        console.log(err);
+    });
+});
+
 app.put('/Server/UpdateRanks', (req, res) => {
-  // Fetch all users from the database
   User.find()
     .then(AllUsers => {
-      // Sort users based on BestTime in ascending order
       const SortedUsers = AllUsers.sort((a, b) => {
         if (a.BestTime === b.BestTime) {
-          // If BestTime is equal, sort by UserId
           return a.UserId > b.UserId ? 1 : -1;
         }
-        // Otherwise, sort by BestTime
         return a.BestTime - b.BestTime;
       });
 
-      // Update the Rank property for each user
       for (let i = 0; i < SortedUsers.length; i++) {
         const user = SortedUsers[i];
         User.updateOne({ _id: user._id }, { Rank: i + 1 })

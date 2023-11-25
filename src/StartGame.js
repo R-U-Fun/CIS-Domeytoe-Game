@@ -21,6 +21,8 @@ import BestTime from './BestTime';
 
 import CurrentUserNameSingleton from './UserSingleton';
 import CurrentLevelSingleton from './LevelSingleton';
+import CurrentDailyChallengesSingleton from './DailyChallengesSingleton';
+import CurrentDailyStreaksSingleton from './DailyStreaksSingleton';
 
 function UpdateGamesWon(){
     let UserData = CurrentUserNameSingleton.getUserName();
@@ -84,6 +86,66 @@ function UpdateGamesPlayed(){
     .catch(error => console.error('Error:', error));
 }
 
+function UpdateDailyStreaks(){
+    let UserData = CurrentUserNameSingleton.getUserName();
+    let DailyStreaks2 = CurrentDailyStreaksSingleton.getDailyStreaks();
+    console.log("DailyStreaks = "+parseInt(DailyStreaks2));
+    console.log("UserData.DailyStreaks = "+parseInt(UserData.DailyStreaks));
+    if((parseInt(DailyStreaks2) > parseInt(UserData.DailyStreaks)) || (parseInt(UserData.DailyStreaks) === null)){
+        console.log("CHECK");
+        fetch(`http://localhost:3214/Server/DailyStreaks/${UserData.Name}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                DailyStreaks: DailyStreaks2,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+        console.log("CHECK2");
+        fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
+        .then(response => response.json())
+        .then(Data => {
+            CurrentUserNameSingleton.setUserName(Data);
+            console.log("NNNNNNNEEEEEEEEWWWWWWWW DDDDDDAAAAAAIIIIIILLLLYYYYYYY SSSSTTTTRRRREEEEAAAAKKKKKS     "+CurrentUserNameSingleton.getUserName().DailyStreaks);
+            alert("New Daily Streaks = "+ CurrentUserNameSingleton.getUserName().DailyStreaks);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
+
+function UpdateChallengeDate(){
+    let UserData = CurrentUserNameSingleton.getUserName();
+    const CurrentDate = new Date();
+    let ChallengeDate = ""+CurrentDate.getFullYear()+(CurrentDate.getMonth()+1)+CurrentDate.getDate()+"";
+    fetch(`http://localhost:3214/Server/ChallengeDate/${UserData.Name}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            ChallengeDate: ChallengeDate,
+        }),
+    })
+    .catch((error) => {
+        console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
+    });
+
+    fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
+    .then(response => response.json())
+    .then(Data => {
+        CurrentUserNameSingleton.setUserName(Data);
+        console.log("CCCCCCHHHHHAAALLLLEEENNNGGEERRR DDDAAATTTTEEEE    "+CurrentUserNameSingleton.getUserName().ChallengeDate);
+    })
+    .catch(error => console.error('Error:', error));
+}
+
 export function GameOver(){
     return(
         <div>
@@ -94,7 +156,6 @@ export function GameOver(){
 }
 
 function GameWon(){
-    UpdateGamesWon();
     return(
         <div>
             <a className="btn btn-danger btn-lg m-4 fw-bold" style={{cursor: 'auto'}}>Correct</a>
@@ -104,28 +165,38 @@ function GameWon(){
     );
 }
 
+function GameIncorrect(){
+    return(
+        <div>
+            <a className="btn btn-danger btn-lg m-4 fw-bold" style={{cursor: 'auto'}}>Incorrect</a>
+            <i className="bi bi-hand-thumbs-down-fill btn btn-danger btn-lg m-4" style={{cursor: 'auto'}}></i>
+        </div>
+    );
+}
+
+
 function CorrectOrNot(props){
     console.log("CorrectorNot - Correct = "+props.Correct);
     console.log("CorrectorNot - User = "+props.Answer);
+    if(CurrentDailyChallengesSingleton.getDailyChallenges()){
+        console.log("CurrentDailyChallengesSingleton.getDailyChallenges() = true                     UpdateDailyStreaks() "+CurrentDailyStreaksSingleton.getDailyStreaks());
+        UpdateDailyStreaks();
+    }
     if(props.Answer === props.Correct){
         props.stopTimer();
+        CurrentDailyStreaksSingleton.setDailyStreaks(CurrentDailyStreaksSingleton.getDailyStreaks()+1);
+        UpdateGamesWon();
         ReactDOM.render(<GameWon />, document.getElementById('InputAnswer'));
     }
     else{
         props.setHowManyHearts(props.HowManyHearts - 1);
+        ReactDOM.render(<Player HowManyHearts={(props.HowManyHearts)-1}/>, document.getElementById('PlayerHere'));
         if(parseInt(props.HowManyHearts) === 1){
             props.stopTimer();
-            ReactDOM.render(<Player HowManyHearts={(props.HowManyHearts)-1}/>, document.getElementById('PlayerHere'));
             ReactDOM.render(<GameOver />, document.getElementById('InputAnswer'));
         }
         else{
-            ReactDOM.render(<Player HowManyHearts={(props.HowManyHearts)-1}/>, document.getElementById('PlayerHere'));
-            return(
-                <div>
-                    <a className="btn btn-danger btn-lg m-4 fw-bold" style={{cursor: 'auto'}}>Incorrect</a>
-                    <i className="bi bi-hand-thumbs-down-fill btn btn-danger btn-lg m-4" style={{cursor: 'auto'}}></i>
-                </div>
-            );
+            ReactDOM.render(<GameIncorrect />, document.getElementById('CoN'));
         }
     }
 }
@@ -151,9 +222,14 @@ function Game(props){
     );
 }
         
-export default function StartGame(props){
+export default function StartGame(){
 
     UpdateGamesPlayed();
+    
+    if(CurrentDailyChallengesSingleton.getDailyChallenges()){
+        console.log("CurrentDailyChallengesSingleton.getDailyChallenges() = true           UpdateChallengeDate()");
+        UpdateChallengeDate();
+    }
 
     let TimeLeft;
     let TimeElapsed = 0;
@@ -169,8 +245,11 @@ export default function StartGame(props){
     else if(Level === 3){
         TimeLeft = 20;
     }
-    else{
+    else if(CurrentDailyChallengesSingleton.getDailyChallenges()){
         TimeLeft = 10;
+    }
+    else{
+        TimeLeft = 5;
     }
 
     let OneSecPass = setInterval(() => {
@@ -194,7 +273,7 @@ export default function StartGame(props){
 
     const stopTimer = () => {
         clearInterval(OneSecPass);
-        ReactDOM.render(<BestTime TimeElapsed={TimeElapsed} />, document.getElementById('CoN'));
+        BestTime(TimeElapsed);
     };
     
     fetch('https://marcconrad.com/uob/tomato/api.php')

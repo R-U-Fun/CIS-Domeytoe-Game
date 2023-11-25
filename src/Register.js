@@ -19,31 +19,28 @@ import Level from './Level';
 import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
 
-function RegisterHandle(props){
-    let NewUserName = props.NewUserName;
-    let NewPassword = props.NewPassword;
-    let NewConfirmPassword = props.NewConfirmPassword;
-
+function RegisterHandle(NewUserName, NewPassword, NewConfirmPassword){
     if( NewUserName && NewPassword && NewConfirmPassword){
+        if(NewPassword === NewConfirmPassword){
         fetch(`http://localhost:3214/Server/UserProfile/${NewUserName}`)
         .then(response => response.json())
         .then(Data => {
             if(!Data){
-                if(NewPassword === NewConfirmPassword){
-                    fetch('http://localhost:3214/Server/Register', {
+                fetch('http://localhost:3214/Server/Register', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            userID: null,
-                            username: NewUserName,
-                            password: NewPassword,
-                            dailyStreaks: 0,
-                            rank: 0,
-                            bestTime: 60,
-                            gamesPlayed: 0,
-                            gamesWon: 0
+                            UserID: null,
+                            Name: NewUserName,
+                            Password: NewPassword,
+                            ChallengeDate: "00000000",
+                            DailyStreaks: 0,
+                            Rank: 0,
+                            BestTime: 60,
+                            GamesPlayed: 0,
+                            GamesWon: 0
                         })
                     })
                     .then(response => response.json())
@@ -56,22 +53,23 @@ function RegisterHandle(props){
                         console.error(error);
                         console.log("Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror registering new user     "+error);
                     });
-                }
-                else{
-                    ReactDOM.render(<Register />, document.getElementById('Box'));
-                    alert("Password & Confirm Password doesn't match");
-                }
             }
             else{
-                ReactDOM.render(<Register />, document.getElementById('Box'));
                 alert("Username Already Exists");
             }
         
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Can Not Connect At The Moment: Server Update On Progress.");
+        });
+        
+        }
+        else{
+            alert("Password & Confirm Password doesn't match");
+        }
     }
     else{
-        ReactDOM.render(<Register />, document.getElementById('Box'));
         alert("Please fill Username, Password & Confirm Password");
     }
 }
@@ -96,7 +94,7 @@ export default function Register(){
                 <span className="input-group-text btn btn-danger" id="basic-addon1"><i className="bi bi-asterisk"></i></span>
                 <input type="password" className="form-control" placeholder="Confirm Password" aria-label="ConfirmPassword" aria-describedby="basic-addon1" ref={ConfirmpasswordRef}/>
             </div>
-            <button type="button" className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<RegisterHandle NewUserName={usernameRef.current.value} NewPassword={passwordRef.current.value} NewConfirmPassword={ConfirmpasswordRef.current.value} />, document.getElementById('Box'))}><i className="bi bi-pen"></i> Register</button>
+            <button type="button" className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => RegisterHandle(usernameRef.current.value, passwordRef.current.value, ConfirmpasswordRef.current.value)}><i className="bi bi-pen"></i> Register</button>
             <br/><br/><br/><br/>
         </div>
     );

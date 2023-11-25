@@ -17,6 +17,19 @@ import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
 
 import CurrentUserNameSingleton from './UserSingleton';
+import CurrentDailyChallengesSingleton from './DailyChallengesSingleton';
+import CurrentDailyStreaksSingleton from './DailyStreaksSingleton';
+
+function DailyChallenges(){
+    let UserData = CurrentUserNameSingleton.getUserName();
+    const CurrentDate = new Date();
+    if((""+CurrentDate.getFullYear()+(CurrentDate.getMonth()+1)+CurrentDate.getDate()+"") === UserData.ChallengeDate){
+        return(true);
+    }
+    else{
+        return(false);
+    }
+}
 
 function LogOut(){
     ReactDOM.render(<div></div>, document.getElementById('PlayerHere')); 
@@ -24,14 +37,22 @@ function LogOut(){
     ReactDOM.render(<Login />, document.getElementById('Box'));
 }
 
-export default function HomeLinks(props){
+export default function HomeLinks(){
     ReactDOM.render(<Player/>, document.getElementById('PlayerHere'));
     ReactDOM.render(<div></div>, document.getElementById('TimerHere'));
+    console.log(DailyChallenges());
     return(
         <div>
             <a className="btn btn-danger m-4 fs-2 fw-bold" style={{width:"225px"}} onClick={() => ReactDOM.render(<HomeLinks />, document.getElementById('Box'))}>Domeytoe</a><br/>
-            <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<Level />, document.getElementById('Box'))} style={{width:"200px"}}>Start Game</button><br/>
-            <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<StartGame />, document.getElementById('Box'))} style={{width:"200px"}}>Daily Challenges</button><br/>
+            <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => {
+                ReactDOM.render(<Level />, document.getElementById('Box'));
+                CurrentDailyChallengesSingleton.setDailyChallenges(false);
+            }} style={{width:"200px"}}>Start Game</button><br/>
+            <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => {
+                ReactDOM.render(<StartGame />, document.getElementById('Box'));
+                CurrentDailyChallengesSingleton.setDailyChallenges(true);
+                CurrentDailyStreaksSingleton.setDailyStreaks(0);
+            }} style={{width:"200px"}} disabled={DailyChallenges() ? true : null}>Daily Challenges</button><br/>
             <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<Leaderboard />, document.getElementById('Box'))} style={{width:"200px"}}>Leaderboard</button><br/>
             <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<UserProfile />, document.getElementById('Box'))} style={{width:"200px"}}>Profile</button><br/>
             <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<LogOut />, document.getElementById('Box'))} style={{width:"200px"}}>Logout</button><br/>
