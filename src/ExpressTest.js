@@ -14,17 +14,17 @@ mongoose.connect('mongodb+srv://Aaroophan:AaroophanMongoDB@cluster0.9y1xdpc.mong
 })
 .catch(err => console.log(err));
 
-app.post('/Server/Register', (req, res) => {
+app.post('/Server/Register', async (req, res) => {
     let newUser = new User({
         UserID: req.body.UserID,
         Name: req.body.Name,
         Password: req.body.Password,
-        ChallengeDate: req.body.ChallengeDate,
         DailyStreaks: req.body.DailyStreaks,
         Rank: req.body.Rank,
         BestTime: req.body.BestTime,
         GamesPlayed: req.body.GamesPlayed,
-        GamesWon: req.body.GamesWon
+        GamesWon: req.body.GamesWon,
+        ChallengeDate: req.body.ChallengeDate
     });
 
     newUser.save()
@@ -51,7 +51,7 @@ let User = mongoose.model('User', new mongoose.Schema({
         GamesWon: Number
 }));
 
-app.get('/Server/UserProfile/:CurrentUserName', (req, res) => {
+app.get('/Server/UserProfile/:CurrentUserName', async (req, res) => {
     let CurrentUserName = req.params.CurrentUserName;
     console.log(CurrentUserName);
     User.findOne({ "Name": CurrentUserName })
@@ -81,7 +81,7 @@ app.get('/Server/UserProfile/:CurrentUserName', (req, res) => {
     });
 });
 
-app.get('/Server/Leaderboard/:Rank', (req, res) => {
+app.get('/Server/Leaderboard/:Rank', async (req, res) => {
     let Rank = req.params.Rank;
     console.log(Rank);
     User.findOne({ "Rank": Rank })
@@ -100,7 +100,7 @@ app.get('/Server/Leaderboard/:Rank', (req, res) => {
     });
 });
 
-app.put('/Server/BestTime/:CurrentUserName', (req, res) => {
+app.put('/Server/BestTime/:CurrentUserName', async (req, res) => {
     let CurrentUserName = req.params.CurrentUserName;
     let newBestTime = req.body.BestTime;
     User.findOneAndUpdate({ "Name": CurrentUserName }, { BestTime: newBestTime }, { new: true })
@@ -112,55 +112,59 @@ app.put('/Server/BestTime/:CurrentUserName', (req, res) => {
     });
 });
 
-app.put('/Server/GamesPlayed/:CurrentUserName', (req, res) => {
+app.put('/Server/GamesPlayed/:CurrentUserName', async (req, res) => {
     let CurrentUserName = req.params.CurrentUserName;
     let newGamesPlayed = req.body.GamesPlayed;
     User.findOneAndUpdate({ "Name": CurrentUserName }, { GamesPlayed: newGamesPlayed }, { new: true })
     .then(user => {
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! GAMES PLAYED UPDATED");
+        res.json(user);
     })
     .catch(err => {
         console.log(err);
     });
 });
 
-app.put('/Server/GamesWon/:CurrentUserName', (req, res) => {
+app.put('/Server/GamesWon/:CurrentUserName', async (req, res) => {
     let CurrentUserName = req.params.CurrentUserName;
     let newGamesWon = req.body.GamesWon;
     User.findOneAndUpdate({ "Name": CurrentUserName }, { GamesWon: newGamesWon }, { new: true })
     .then(user => {
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! GAMES WON UPDATED");
+        res.json(user);
     })
     .catch(err => {
         console.log(err);
     });
 });
 
-app.put('/Server/DailyStreaks/:CurrentUserName', (req, res) => {
+app.put('/Server/DailyStreaks/:CurrentUserName', async (req, res) => {
     let CurrentUserName = req.params.CurrentUserName;
-    let newDailyStreaks = req.body.DailyStreaks;
+    let newDailyStreaks = parseInt(req.body.DailyStreaks);
     User.findOneAndUpdate({ "Name": CurrentUserName }, { DailyStreaks: newDailyStreaks }, { new: true })
     .then(user => {
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Daily Streaks UPDATED");
+        res.json(user);
     })
     .catch(err => {
         console.log(err);
     });
 });
 
-app.put('/Server/ChallengeDate/:CurrentUserName', (req, res) => {
+app.put('/Server/ChallengeDate/:CurrentUserName', async (req, res) => {
     let CurrentUserName = req.params.CurrentUserName;
     let newChallengeDate = req.body.ChallengeDate;
     User.findOneAndUpdate({ "Name": CurrentUserName }, { ChallengeDate: newChallengeDate }, { new: true })
     .then(user => {
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Challenge Date UPDATED");
+        res.json(user);
     })
     .catch(err => {
         console.log(err);
     });
 });
 
-app.put('/Server/UpdateRanks', (req, res) => {
+app.put('/Server/UpdateRanks', async (req, res) => {
   User.find()
     .then(AllUsers => {
       const SortedUsers = AllUsers.sort((a, b) => {
@@ -173,10 +177,9 @@ app.put('/Server/UpdateRanks', (req, res) => {
       for (let i = 0; i < SortedUsers.length; i++) {
         const user = SortedUsers[i];
         User.updateOne({ _id: user._id }, { Rank: i + 1 })
-          .then(() => console.log("User rank updated successfully"))
+          .then(() => console.log("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRrR  User rank updated successfully"))
           .catch(err => console.log("Error updating user rank: " + err));
       }
-      console.log("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRrRanks updated successfully");
     })
     .catch(err => {
       console.error(err);

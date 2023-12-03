@@ -24,7 +24,7 @@ import CurrentLevelSingleton from './LevelSingleton';
 import CurrentDailyChallengesSingleton from './DailyChallengesSingleton';
 import CurrentDailyStreaksSingleton from './DailyStreaksSingleton';
 
-function UpdateGamesWon(){
+async function UpdateGamesWon(){
     let UserData = CurrentUserNameSingleton.getUserName();
     let GamesWon = UserData.GamesWon;
     if(GamesWon === null){
@@ -33,7 +33,8 @@ function UpdateGamesWon(){
     else{
         GamesWon = GamesWon + 1;
     }
-    fetch(`http://localhost:3214/Server/GamesWon/${UserData.Name}`, {
+
+    await fetch(`http://localhost:3214/Server/GamesWon/${UserData.Name}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -46,7 +47,7 @@ function UpdateGamesWon(){
         console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
     });
 
-    fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
+    await fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
     .then(response => response.json())
     .then(Data => {
         CurrentUserNameSingleton.setUserName(Data);
@@ -55,29 +56,33 @@ function UpdateGamesWon(){
     .catch(error => console.error('Error:', error));
 }
 
-function UpdateGamesPlayed(){
+async function UpdateGamesPlayed(){
     let UserData = CurrentUserNameSingleton.getUserName();
-    let GamesPlayed = UserData.GamesPlayed;
-    if(GamesPlayed === null){
-        GamesPlayed=1;
+    let GamesPlayed2 = UserData.GamesPlayed;
+    if(GamesPlayed2 === null){
+        GamesPlayed2=1;
     }
     else{
-        GamesPlayed = GamesPlayed + 1;
+        GamesPlayed2 = GamesPlayed2 + 1;
     }
-    fetch(`http://localhost:3214/Server/GamesPlayed/${UserData.Name}`, {
+    await fetch(`http://localhost:3214/Server/GamesPlayed/${UserData.Name}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            GamesPlayed: GamesPlayed,
+            GamesPlayed: GamesPlayed2,
         }),
+    })
+    .then(response => response.json())
+    .then(Data => {
+        console.table(Data);
     })
     .catch((error) => {
         console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
     });
 
-    fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
+    await fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
     .then(response => response.json())
     .then(Data => {
         CurrentUserNameSingleton.setUserName(Data);
@@ -86,30 +91,36 @@ function UpdateGamesPlayed(){
     .catch(error => console.error('Error:', error));
 }
 
-function UpdateDailyStreaks(){
+async function UpdateDailyStreaks(){
     let UserData = CurrentUserNameSingleton.getUserName();
-    let DailyStreaks2 = CurrentDailyStreaksSingleton.getDailyStreaks();
-    console.log("DailyStreaks = "+parseInt(DailyStreaks2));
+    let DailyStreaks = CurrentDailyStreaksSingleton.getDailyStreaks();
+    console.log("DailyStreaks = "+parseInt(DailyStreaks));
     console.log("UserData.DailyStreaks = "+parseInt(UserData.DailyStreaks));
-    if((parseInt(DailyStreaks2) > parseInt(UserData.DailyStreaks)) || (parseInt(UserData.DailyStreaks) === null)){
-        console.log("CHECK");
-        fetch(`http://localhost:3214/Server/DailyStreaks/${UserData.Name}`, {
+    if((parseInt(DailyStreaks) > parseInt(UserData.DailyStreaks)) || (parseInt(UserData.DailyStreaks) === null)){
+        console.log("UserData.Name "+UserData.Name);
+        console.log("UserData.DailyStreaks = "+parseInt(UserData.DailyStreaks));
+        console.log("DailyStreaks "+parseInt(DailyStreaks));
+
+        await fetch(`http://localhost:3214/Server/DailyStreaks/${UserData.Name}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                DailyStreaks: DailyStreaks2,
+                DailyStreaks: DailyStreaks,
             }),
         })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => 
+            console.table(data)
+        )
         .catch((error) => {
             console.error('Error:', error);
         });
 
         console.log("CHECK2");
-        fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
+        
+        await fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
         .then(response => response.json())
         .then(Data => {
             CurrentUserNameSingleton.setUserName(Data);
@@ -120,11 +131,11 @@ function UpdateDailyStreaks(){
     }
 }
 
-function UpdateChallengeDate(){
+async function UpdateChallengeDate(){
     let UserData = CurrentUserNameSingleton.getUserName();
     const CurrentDate = new Date();
     let ChallengeDate = ""+CurrentDate.getFullYear()+(CurrentDate.getMonth()+1)+CurrentDate.getDate()+"";
-    fetch(`http://localhost:3214/Server/ChallengeDate/${UserData.Name}`, {
+    await fetch(`http://localhost:3214/Server/ChallengeDate/${UserData.Name}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -133,11 +144,15 @@ function UpdateChallengeDate(){
             ChallengeDate: ChallengeDate,
         }),
     })
+    .then(response => response.json())
+    .then(Data => {
+        console.table(Data);
+    })
     .catch((error) => {
         console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
     });
 
-    fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
+    await fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
     .then(response => response.json())
     .then(Data => {
         CurrentUserNameSingleton.setUserName(Data);
@@ -174,14 +189,10 @@ function GameIncorrect(){
     );
 }
 
-
 function CorrectOrNot(props){
     console.log("CorrectorNot - Correct = "+props.Correct);
     console.log("CorrectorNot - User = "+props.Answer);
-    if(CurrentDailyChallengesSingleton.getDailyChallenges()){
-        console.log("CurrentDailyChallengesSingleton.getDailyChallenges() = true                     UpdateDailyStreaks() "+CurrentDailyStreaksSingleton.getDailyStreaks());
-        UpdateDailyStreaks();
-    }
+    
     if(props.Answer === props.Correct){
         props.stopTimer();
         CurrentDailyStreaksSingleton.setDailyStreaks(CurrentDailyStreaksSingleton.getDailyStreaks()+1);
@@ -199,6 +210,12 @@ function CorrectOrNot(props){
             ReactDOM.render(<GameIncorrect />, document.getElementById('CoN'));
         }
     }
+
+    if(CurrentDailyChallengesSingleton.getDailyChallenges()){
+        console.log("CurrentDailyChallengesSingleton.getDailyChallenges() = true                     UpdateDailyStreaks() "+CurrentDailyStreaksSingleton.getDailyStreaks());
+        UpdateDailyStreaks();
+    }
+
 }
 
 function Game(props){
@@ -245,7 +262,7 @@ export default function StartGame(){
     else if(Level === 3){
         TimeLeft = 20;
     }
-    else if(CurrentDailyChallengesSingleton.getDailyChallenges()){
+    else if(Level === 4){
         TimeLeft = 10;
     }
     else{
@@ -256,15 +273,14 @@ export default function StartGame(){
         if(TimeLeft > 0) {
             TimeLeft = (TimeLeft - 1);
             TimeElapsed = (TimeElapsed + 1);
-            console.log(TimeLeft);
-            console.log(TimeElapsed);
+            //console.log(TimeLeft);
+            //console.log(TimeElapsed);
             if(document.getElementById('AnswerText')){
                 ReactDOM.render(<Timer TimeLeft={TimeLeft} TimeElapsed={TimeElapsed} />, document.getElementById('TimerHere'));
             }
             else{
                 clearInterval(OneSecPass);
             }
-            
         } else {
             clearInterval(OneSecPass);
             ReactDOM.render(<GameOver />, document.getElementById('InputAnswer'));

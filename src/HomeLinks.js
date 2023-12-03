@@ -19,6 +19,7 @@ import UserProfile from './UserProfile';
 import CurrentUserNameSingleton from './UserSingleton';
 import CurrentDailyChallengesSingleton from './DailyChallengesSingleton';
 import CurrentDailyStreaksSingleton from './DailyStreaksSingleton';
+import CurrentLevelSingleton from './LevelSingleton';
 
 function DailyChallenges(){
     let UserData = CurrentUserNameSingleton.getUserName();
@@ -52,6 +53,7 @@ export default function HomeLinks(){
                 ReactDOM.render(<StartGame />, document.getElementById('Box'));
                 CurrentDailyChallengesSingleton.setDailyChallenges(true);
                 CurrentDailyStreaksSingleton.setDailyStreaks(0);
+                CurrentLevelSingleton.setLevel(4);
             }} style={{width:"200px"}} disabled={DailyChallenges() ? true : null}>Daily Challenges</button><br/>
             <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<Leaderboard />, document.getElementById('Box'))} style={{width:"200px"}}>Leaderboard</button><br/>
             <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<UserProfile />, document.getElementById('Box'))} style={{width:"200px"}}>Profile</button><br/>
