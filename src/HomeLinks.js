@@ -1,21 +1,12 @@
 import ReactDOM from 'react-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-
-import Main from './App';
-import Header from './Header';
-import Footer from './Footer';
 import Login from './Login';
-import Register from './Register';
-
-import HomePage from './HomePage';
 import Player from './Player';
-import Timer from './Timer';
 import StartGame from './StartGame';
 import Level from './Level';
 import Leaderboard from './Leaderboard';
 import UserProfile from './UserProfile';
-
 import CurrentUserNameSingleton from './UserSingleton';
 import CurrentDailyChallengesSingleton from './DailyChallengesSingleton';
 import CurrentDailyStreaksSingleton from './DailyStreaksSingleton';
@@ -30,12 +21,6 @@ function DailyChallenges(){
     else{
         return(false);
     }
-}
-
-function LogOut(){
-    ReactDOM.render(<div></div>, document.getElementById('PlayerHere')); 
-    ReactDOM.render(<div></div>, document.getElementById('TimerHere'));
-    ReactDOM.render(<Login />, document.getElementById('Box'));
 }
 
 export default function HomeLinks(){
@@ -57,7 +42,11 @@ export default function HomeLinks(){
             }} style={{width:"200px"}} disabled={DailyChallenges() ? true : null}>Daily Challenges</button><br/>
             <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<Leaderboard />, document.getElementById('Box'))} style={{width:"200px"}}>Leaderboard</button><br/>
             <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<UserProfile />, document.getElementById('Box'))} style={{width:"200px"}}>Profile</button><br/>
-            <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => ReactDOM.render(<LogOut />, document.getElementById('Box'))} style={{width:"200px"}}>Logout</button><br/>
+            <button className="btn btn-danger btn-lg m-2 fw-bold" onClick={() => {
+                ReactDOM.render(<div></div>, document.getElementById('PlayerHere')); 
+                ReactDOM.render(<div></div>, document.getElementById('TimerHere'));
+                ReactDOM.render(<Login />, document.getElementById('Box'));
+            }} style={{width:"200px"}}>Logout</button><br/>
         </div>
     );
 }

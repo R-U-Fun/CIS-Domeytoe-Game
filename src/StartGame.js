@@ -1,24 +1,11 @@
 import ReactDOM from 'react-dom';
-import React, { useRef } from 'react';
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-
-import Main from './App';
-import Header from './Header';
-import Footer from './Footer';
-import Login from './Login';
-import Register from './Register';
 import HomeLinks from './HomeLinks';
-import HomePage from './HomePage';
 import Player from './Player';
-import Timer, { StopTimer } from './Timer';
-
-import Level from './Level';
-import Leaderboard from './Leaderboard';
-import UserProfile from './UserProfile';
+import Timer from './Timer';
 import BestTime from './BestTime';
-
 import CurrentUserNameSingleton from './UserSingleton';
 import CurrentLevelSingleton from './LevelSingleton';
 import CurrentDailyChallengesSingleton from './DailyChallengesSingleton';
@@ -273,8 +260,6 @@ export default function StartGame(){
         if(TimeLeft > 0) {
             TimeLeft = (TimeLeft - 1);
             TimeElapsed = (TimeElapsed + 1);
-            //console.log(TimeLeft);
-            //console.log(TimeElapsed);
             if(document.getElementById('AnswerText')){
                 ReactDOM.render(<Timer TimeLeft={TimeLeft} TimeElapsed={TimeElapsed} />, document.getElementById('TimerHere'));
             }

@@ -1,20 +1,7 @@
 import ReactDOM from 'react-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-
-import Main from './App';
-import Header from './Header';
-import Footer from './Footer';
-import Login from './Login';
-import Register from './Register';
 import HomeLinks from './HomeLinks';
-import HomePage from './HomePage';
-import Player from './Player';
-import Timer from './Timer';
-import StartGame from './StartGame';
-import Level from './Level';
-
-import UserProfile from './UserProfile';
 
 function LeaderboardUI(props){
     return(
@@ -33,13 +20,12 @@ function UsersOfLeaderboard(props){
     .then(response => response.json())
     .then(Data => {
         console.table(Data);
-
         ReactDOM.render(<LeaderboardUI Data={Data} />, document.getElementById('tr'+props.Rank));
     })
     .catch(error => console.error('Error:', error));
 }
 
-export default function Leaderboard(props){
+export default function Leaderboard(){
     fetch('http://localhost:3214/Server/UpdateRanks', {
         method: 'PUT',
         headers: {
@@ -54,10 +40,10 @@ export default function Leaderboard(props){
                 <tbody>
                     <tr>
                         <tr>
-                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"40px", cursor: 'auto'}}><i className="bi bi-trophy-fill"></i></a></th>
+                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"40px" , cursor: 'auto'}}><i className="bi bi-trophy-fill"></i></a></th>
                         <th><a className="btn btn-danger m-1 fw-bold" style={{width:"150px", cursor: 'auto'}}><i className="bi bi-person-fill"></i></a></th>
-                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}><i className="bi bi-hourglass-split"></i></a></th>
-                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"50px", cursor: 'auto'}}><i className="bi bi-fire"></i></a></th>
+                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"50px" , cursor: 'auto'}}><i className="bi bi-hourglass-split"></i></a></th>
+                        <th><a className="btn btn-danger m-1 fw-bold" style={{width:"50px" , cursor: 'auto'}}><i className="bi bi-fire"></i></a></th>
                         </tr>
                     </tr>
                     <tr id="tr1">
