@@ -21,7 +21,7 @@ async function UpdateGamesWon(){
         GamesWon = GamesWon + 1;
     }
 
-    await fetch(`http://localhost:3214/Server/GamesWon/${UserData.Name}`, {
+    await fetch(`https://cis-domeytoe-game.onrender.com/Server/GamesWon/${UserData.Name}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ async function UpdateGamesWon(){
         console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
     });
 
-    await fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
+    await fetch(`https://cis-domeytoe-game.onrender.com/Server/UserProfile/${UserData.Name}`)
     .then(response => response.json())
     .then(Data => {
         CurrentUserNameSingleton.setUserName(Data);
@@ -52,7 +52,7 @@ async function UpdateGamesPlayed(){
     else{
         GamesPlayed2 = GamesPlayed2 + 1;
     }
-    await fetch(`http://localhost:3214/Server/GamesPlayed/${UserData.Name}`, {
+    await fetch(`https://cis-domeytoe-game.onrender.com/Server/GamesPlayed/${UserData.Name}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ async function UpdateGamesPlayed(){
         console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
     });
 
-    await fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
+    await fetch(`https://cis-domeytoe-game.onrender.com/Server/UserProfile/${UserData.Name}`)
     .then(response => response.json())
     .then(Data => {
         CurrentUserNameSingleton.setUserName(Data);
@@ -88,7 +88,7 @@ async function UpdateDailyStreaks(){
         console.log("UserData.DailyStreaks = "+parseInt(UserData.DailyStreaks));
         console.log("DailyStreaks "+parseInt(DailyStreaks));
 
-        await fetch(`http://localhost:3214/Server/DailyStreaks/${UserData.Name}`, {
+        await fetch(`https://cis-domeytoe-game.onrender.com/Server/DailyStreaks/${UserData.Name}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ async function UpdateDailyStreaks(){
 
         console.log("CHECK2");
         
-        await fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
+        await fetch(`https://cis-domeytoe-game.onrender.com/Server/UserProfile/${UserData.Name}`)
         .then(response => response.json())
         .then(Data => {
             CurrentUserNameSingleton.setUserName(Data);
@@ -122,7 +122,7 @@ async function UpdateChallengeDate(){
     let UserData = CurrentUserNameSingleton.getUserName();
     const CurrentDate = new Date();
     let ChallengeDate = ""+CurrentDate.getFullYear()+(CurrentDate.getMonth()+1)+CurrentDate.getDate()+"";
-    await fetch(`http://localhost:3214/Server/ChallengeDate/${UserData.Name}`, {
+    await fetch(`https://cis-domeytoe-game.onrender.com/Server/ChallengeDate/${UserData.Name}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -139,7 +139,7 @@ async function UpdateChallengeDate(){
         console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
     });
 
-    await fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
+    await fetch(`https://cis-domeytoe-game.onrender.com/Server/UserProfile/${UserData.Name}`)
     .then(response => response.json())
     .then(Data => {
         CurrentUserNameSingleton.setUserName(Data);

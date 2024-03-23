@@ -16,7 +16,7 @@ function LeaderboardUI(props){
 
 function UsersOfLeaderboard(props){
     let Rank = props.Rank;
-    fetch(`http://localhost:3214/Server/Leaderboard/${Rank}`)
+    fetch(`https://cis-domeytoe-game.onrender.com/Server/Leaderboard/${Rank}`)
     .then(response => response.json())
     .then(Data => {
         console.table(Data);
@@ -26,7 +26,7 @@ function UsersOfLeaderboard(props){
 }
 
 export default function Leaderboard(){
-    fetch('http://localhost:3214/Server/UpdateRanks', {
+    fetch('https://cis-domeytoe-game.onrender.com/Server/UpdateRanks', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

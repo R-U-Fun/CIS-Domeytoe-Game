@@ -7,11 +7,11 @@ import Login from './Login';
 function RegisterHandle(NewUserName, NewPassword, NewConfirmPassword){
     if( NewUserName && NewPassword && NewConfirmPassword){
         if(NewPassword === NewConfirmPassword){
-        fetch(`http://localhost:3214/Server/UserProfile/${NewUserName}`)
+        fetch(`https://cis-domeytoe-game.onrender.com/Server/UserProfile/${NewUserName}`)
         .then(response => response.json())
         .then(Data => {
             if(!Data){
-                fetch('http://localhost:3214/Server/Register', {
+                fetch('https://cis-domeytoe-game.onrender.com/Server/Register', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
