@@ -1,11 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-<<<<<<< HEAD
 const port = process.env.PORT;
-=======
-const port = process.env.PORT || 3214;
->>>>>>> 452ceb41586246f5e9cca2bdd1da089b1d858c33
 const mongoose = require('mongoose');
 
 app.use(cors());

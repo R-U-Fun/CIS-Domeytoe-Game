@@ -8,11 +8,7 @@ import CurrentUserNameSingleton from './UserSingleton';
 
 function LoginHandle(CurrentUserName, CurrentPassword){
     if(CurrentUserName && CurrentPassword){
-<<<<<<< HEAD
         fetch(`https://cis-domeytoe-server.onrender.com/Server/UserProfile/${CurrentUserName}`)
-=======
-        fetch(`https://cis-domeytoe-game.onrender.com:3214/Server/UserProfile/${CurrentUserName}`)
->>>>>>> 452ceb41586246f5e9cca2bdd1da089b1d858c33
         .then(response => response.json())
         .then(Data => {
             if(Data && CurrentPassword === Data.Password){

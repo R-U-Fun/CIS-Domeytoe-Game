@@ -21,11 +21,7 @@ async function UpdateGamesWon(){
         GamesWon = GamesWon + 1;
     }
 
-<<<<<<< HEAD
     await fetch(`https://cis-domeytoe-server.onrender.com/Server/GamesWon/${UserData.Name}`, {
-=======
-    await fetch(`https://cis-domeytoe-game.onrender.com/Server/GamesWon/${UserData.Name}`, {
->>>>>>> 452ceb41586246f5e9cca2bdd1da089b1d858c33
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -38,11 +34,7 @@ async function UpdateGamesWon(){
         console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
     });
 
-<<<<<<< HEAD
     await fetch(`https://cis-domeytoe-server.onrender.com/Server/UserProfile/${UserData.Name}`)
-=======
-    await fetch(`https://cis-domeytoe-game.onrender.com/Server/UserProfile/${UserData.Name}`)
->>>>>>> 452ceb41586246f5e9cca2bdd1da089b1d858c33
     .then(response => response.json())
     .then(Data => {
         CurrentUserNameSingleton.setUserName(Data);
@@ -60,11 +52,7 @@ async function UpdateGamesPlayed(){
     else{
         GamesPlayed2 = GamesPlayed2 + 1;
     }
-<<<<<<< HEAD
     await fetch(`https://cis-domeytoe-server.onrender.com/Server/GamesPlayed/${UserData.Name}`, {
-=======
-    await fetch(`https://cis-domeytoe-game.onrender.com/Server/GamesPlayed/${UserData.Name}`, {
->>>>>>> 452ceb41586246f5e9cca2bdd1da089b1d858c33
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -81,11 +69,7 @@ async function UpdateGamesPlayed(){
         console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
     });
 
-<<<<<<< HEAD
     await fetch(`https://cis-domeytoe-server.onrender.com/Server/UserProfile/${UserData.Name}`)
-=======
-    await fetch(`https://cis-domeytoe-game.onrender.com/Server/UserProfile/${UserData.Name}`)
->>>>>>> 452ceb41586246f5e9cca2bdd1da089b1d858c33
     .then(response => response.json())
     .then(Data => {
         CurrentUserNameSingleton.setUserName(Data);
@@ -104,11 +88,7 @@ async function UpdateDailyStreaks(){
         console.log("UserData.DailyStreaks = "+parseInt(UserData.DailyStreaks));
         console.log("DailyStreaks "+parseInt(DailyStreaks));
 
-<<<<<<< HEAD
         await fetch(`https://cis-domeytoe-server.onrender.com/Server/DailyStreaks/${UserData.Name}`, {
-=======
-        await fetch(`https://cis-domeytoe-game.onrender.com/Server/DailyStreaks/${UserData.Name}`, {
->>>>>>> 452ceb41586246f5e9cca2bdd1da089b1d858c33
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -127,11 +107,7 @@ async function UpdateDailyStreaks(){
 
         console.log("CHECK2");
         
-<<<<<<< HEAD
         await fetch(`https://cis-domeytoe-server.onrender.com/Server/UserProfile/${UserData.Name}`)
-=======
-        await fetch(`https://cis-domeytoe-game.onrender.com/Server/UserProfile/${UserData.Name}`)
->>>>>>> 452ceb41586246f5e9cca2bdd1da089b1d858c33
         .then(response => response.json())
         .then(Data => {
             CurrentUserNameSingleton.setUserName(Data);
@@ -146,11 +122,7 @@ async function UpdateChallengeDate(){
     let UserData = CurrentUserNameSingleton.getUserName();
     const CurrentDate = new Date();
     let ChallengeDate = ""+CurrentDate.getFullYear()+(CurrentDate.getMonth()+1)+CurrentDate.getDate()+"";
-<<<<<<< HEAD
     await fetch(`https://cis-domeytoe-server.onrender.com/Server/ChallengeDate/${UserData.Name}`, {
-=======
-    await fetch(`https://cis-domeytoe-game.onrender.com/Server/ChallengeDate/${UserData.Name}`, {
->>>>>>> 452ceb41586246f5e9cca2bdd1da089b1d858c33
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -167,11 +139,7 @@ async function UpdateChallengeDate(){
         console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror:', error);
     });
 
-<<<<<<< HEAD
     await fetch(`https://cis-domeytoe-server.onrender.com/Server/UserProfile/${UserData.Name}`)
-=======
-    await fetch(`https://cis-domeytoe-game.onrender.com/Server/UserProfile/${UserData.Name}`)
->>>>>>> 452ceb41586246f5e9cca2bdd1da089b1d858c33
     .then(response => response.json())
     .then(Data => {
         CurrentUserNameSingleton.setUserName(Data);
