@@ -16,7 +16,11 @@ function LeaderboardUI(props){
 
 function UsersOfLeaderboard(props){
     let Rank = props.Rank;
+<<<<<<< HEAD
     fetch(`https://cis-domeytoe-server.onrender.com/Server/Leaderboard/${Rank}`)
+=======
+    fetch(`https://cis-domeytoe-game.onrender.com/Server/Leaderboard/${Rank}`)
+>>>>>>> 452ceb41586246f5e9cca2bdd1da089b1d858c33
     .then(response => response.json())
     .then(Data => {
         console.table(Data);
@@ -26,7 +30,11 @@ function UsersOfLeaderboard(props){
 }
 
 export default function Leaderboard(){
+<<<<<<< HEAD
     fetch('https://cis-domeytoe-server.onrender.com/Server/UpdateRanks', {
+=======
+    fetch('https://cis-domeytoe-game.onrender.com/Server/UpdateRanks', {
+>>>>>>> 452ceb41586246f5e9cca2bdd1da089b1d858c33
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
