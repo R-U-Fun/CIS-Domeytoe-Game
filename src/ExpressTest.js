@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = 3214;
+const port = process.env.PORT;
 const mongoose = require('mongoose');
 
 app.use(cors());
@@ -187,5 +187,5 @@ app.put('/Server/UpdateRanks', async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+    console.log(`Server is running at ${port}`);
 });

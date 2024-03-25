@@ -9,7 +9,7 @@ export default function BestTime(TimeElapsed){
 
     if(TimeElapsed < UserData.BestTime || UserData.BestTime === null){
 
-        fetch(`http://localhost:3214/Server/BestTime/${UserData.Name}`, {
+        fetch(`https://cis-domeytoe-server.onrender.com/Server/BestTime/${UserData.Name}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export default function BestTime(TimeElapsed){
             console.error('Error:', error);
         });
                     
-        fetch('http://localhost:3214/Server/UpdateRanks', {
+        fetch('https://cis-domeytoe-server.onrender.com/Server/UpdateRanks', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export default function BestTime(TimeElapsed){
         
         alert("New Best Time = "+ TimeElapsed +" Sec");
 
-        fetch(`http://localhost:3214/Server/UserProfile/${UserData.Name}`)
+        fetch(`https://cis-domeytoe-server.onrender.com/Server/UserProfile/${UserData.Name}`)
         .then(response => response.json())
         .then(Data => {
             CurrentUserNameSingleton.setUserName(Data);
